@@ -1,0 +1,103 @@
+.glass-panel {
+  background: rgba(84, 79, 244, 0.05); /* very light tint of light-blue */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(84, 79, 244, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 25, 87, 0.05);
+}
+
+.neon-border {
+  border-color: $orange-light;
+  box-shadow: 0 0 10px rgba($orange-light, 0.3);
+}
+
+.glass-edge {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 25, 87, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 1px 0 0 rgba(255, 255, 255, 0.2),
+    inset -1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary {
+  color: white !important;
+  box-shadow: 0 0 15px rgba($primary, 0.4);
+  border: none;
+  
+  &:hover, &:focus, &:active {
+    color: white !important;
+    box-shadow: 0 0 25px rgba($primary, 0.6);
+    background: lighten($primary, 5%);
+  }
+}
+
+.glass-input {
+  background: rgba(84, 79, 244, 0.02);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 25, 87, 0.15);
+  color: $dark-blue;
+  &:focus {
+    background: rgba(84, 79, 244, 0.05);
+    color: $dark-blue;
+    border-color: $light-blue;
+    box-shadow: 0 0 10px rgba($light-blue, 0.2);
+  }
+  &::placeholder {
+    color: rgba(0, 25, 87, 0.4);
+  }
+}
+.btn-glass {
+  background: rgba(0, 25, 87, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4); /* White-ish highlight border rather than dark outline */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: rgba($dark-blue, 0.5); /* Lighter opacity for icons */
+  transition: all 0.2s ease;
+  
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.9), -1px -1px 1px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: rgba(0, 25, 87, 0.12);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: rgba($dark-blue, 0.7); /* Slightly stronger on hover */
+  }
+
+  &:active {
+    background: rgba(0, 25, 87, 0.15);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.9), 1px 1px 1px rgba(0, 0, 0, 0.1);
+    transform: translateY(1px);
+    border-color: rgba(0, 25, 87, 0.1);
+    color: rgba($dark-blue, 0.8);
+  }
+}
+
+.btn-glass-primary {
+  background: rgba($strong-orange, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4); /* White-ish highlight border */
+  box-shadow: 0 4px 8px rgba($strong-orange, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: rgba($strong-orange, 0.8); /* Lighter opacity for icons */
+  transition: all 0.2s ease;
+
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6), -1px -1px 1px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    background: rgba($strong-orange, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: $strong-orange; /* Full strength on hover */
+    box-shadow: 0 4px 12px rgba($strong-orange, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  &:active {
+    background: rgba($strong-orange, 0.3);
+    box-shadow: inset 0 2px 5px rgba($strong-orange, 0.4);
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.6), 1px 1px 1px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
+    border-color: rgba($strong-orange, 0.2);
+  }
+}

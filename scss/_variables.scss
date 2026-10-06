@@ -1,0 +1,24 @@
+// Exact colors from ohrbob-logo.svg
+$dark-blue: #001957;
+$light-blue: #544ff4;
+$yellow: #fdb200;
+$orange-light: #ff9a00;
+$strong-orange: #fc5d00;
+$pale-yellow: #fff4d8;
+$pale-violet: #e9e8fd;
+
+// Bootstrap theme colors mapping
+$primary: $strong-orange;
+$secondary: $light-blue;
+$info: $light-blue;
+$warning: $yellow;
+$danger: #dc3545; // Standard bootstrap danger (red)
+$light: $pale-yellow;
+$dark: $dark-blue;
+
+$body-bg: #ffffff;
+$body-color: $dark-blue;
+
+// Font overrides
+$headings-font-family: "Sulphur Point", sans-serif;
+$headings-font-weight: 700;

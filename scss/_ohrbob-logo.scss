@@ -1,0 +1,75 @@
+// Ohrbob Logo Component
+
+.ohrbob-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+  line-height: 1;
+
+  // The text container
+  .ohrbob-logo-text {
+    display: inline-flex;
+    letter-spacing: -0.02em; // slight tightening for logo feel
+    
+    .char-1 { color: $light-blue; }
+    .char-2 { color: $dark-blue; }
+    .char-3 { color: $strong-orange; }
+    .char-4 { color: $light-blue; }
+    .char-5 { color: $strong-orange; }
+    .char-6 { color: $dark-blue; }
+  }
+
+  // The icon container (SVG)
+  .ohrbob-logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img, svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  // Modifiers for layout
+
+  // Logo Left (Inline)
+  &.ohrbob-logo-left {
+    flex-direction: row;
+
+    .ohrbob-logo-icon {
+      height: 1em; // Scales perfectly with the font-size of the parent
+      margin-right: 0.25em;
+
+      img, svg {
+        height: 100%;
+        width: auto;
+      }
+    }
+  }
+
+  // Logo Above (Stacked)
+  &.ohrbob-logo-above {
+    display: inline-grid;
+    grid-template-columns: min-content;
+    justify-items: center;
+    align-items: center;
+    
+    .ohrbob-logo-icon {
+      grid-row: 1;
+      grid-column: 1;
+      width: 100%; // Spans the exact width of the text
+      min-width: 0; // Prevents the image's intrinsic size from blowing up the column width
+      margin-bottom: 0.15em;
+    }
+
+    .ohrbob-logo-text {
+      grid-row: 2;
+      grid-column: 1;
+      width: max-content; // Forces the grid column to be exactly the text width
+    }
+  }
+}

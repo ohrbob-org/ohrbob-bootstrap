@@ -1,0 +1,321 @@
+@mixin audio-range($fill) {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  background: transparent;
+  cursor: pointer;
+
+  &::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(to right,
+      $fill 0 var(--progress, 0%),
+      rgba($dark-blue, 0.12) var(--progress, 0%) 100%);
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    margin-top: -4px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid rgba(0, 25, 87, 0.2);
+    box-shadow: 0 1px 3px rgba(0, 25, 87, 0.25);
+    transition: transform 0.15s ease;
+  }
+
+  &::-moz-range-track {
+    height: 4px;
+    border-radius: 2px;
+    background: rgba($dark-blue, 0.12);
+  }
+
+  &::-moz-range-progress {
+    height: 4px;
+    border-radius: 2px;
+    background: $fill;
+  }
+
+  &::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid rgba(0, 25, 87, 0.2);
+    box-shadow: 0 1px 3px rgba(0, 25, 87, 0.25);
+  }
+
+  &:hover::-webkit-slider-thumb,
+  &:focus-visible::-webkit-slider-thumb { transform: scale(1.15); }
+  &:hover::-moz-range-thumb,
+  &:focus-visible::-moz-range-thumb { transform: scale(1.15); }
+
+  &:focus { outline: none; }
+  &:focus-visible { outline: 2px solid rgba($light-blue, 0.6); outline-offset: 2px; }
+}
+
+.audio-widget {
+  display: block;
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  padding: 10px 16px;
+  border-radius: 16px;
+  z-index: 1050;
+  transition: all 0.3s ease;
+  
+  // Use a pseudo-element to tint the glass without overriding the base glass panel properties
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    // Mix in a bit of the vivid light-blue to increase the visual saturation/depth of the pale violet
+    background: mix($light-blue, $pale-violet, 12%);
+    opacity: 0.45; 
+    border-radius: inherit;
+    z-index: -1; /* Puts the tint behind the controls, but over the blur */
+    pointer-events: none;
+  }
+
+  .audio-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .audio-meta {
+    flex: 0 1 260px;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .track-cover {
+      width: 56px;
+      height: 56px;
+      flex: 0 0 56px;
+      border-radius: 8px;
+      object-fit: cover;
+      background-color: rgba($dark-blue, 0.08);
+    }
+
+    .track-cover-empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: rgba($dark-blue, 0.4);
+    }
+
+    .audio-info {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+
+      .station-name {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        color: $primary;
+
+        .station-dot {
+          width: 6px;
+          height: 6px;
+          flex: 0 0 6px;
+          border-radius: 50%;
+          background-color: $primary;
+          box-shadow: 0 0 5px $primary;
+        }
+      }
+
+      .track-title,
+      .track-description {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .track-title { font-size: 1rem; }
+      .track-description { font-size: 0.8rem; opacity: 0.75; }
+    }
+  }
+
+  .audio-controls {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 0 0 auto;
+
+    .btn-play {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      min-height: 48px;
+      padding: 0;
+      padding-left: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+      border-radius: 50% !important;
+      
+      svg { display: block; }
+    }
+
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      min-height: 32px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+      border-radius: 50% !important;
+      svg { display: block; }
+    }
+
+    .btn-skip {
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
+      min-height: 34px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+      border-radius: 50% !important;
+      svg { display: block; }
+    }
+  }
+
+  .audio-progress-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1 1 auto;
+    min-width: 120px;
+
+    .time-elapsed, .time-total {
+      font-size: 0.72rem;
+      font-variant-numeric: tabular-nums;
+      opacity: 0.7;
+      min-width: 38px;
+    }
+    .time-elapsed { text-align: right; }
+    .audio-progress { @include audio-range($light-blue); flex: 1 1 auto; min-width: 0; }
+  }
+
+  .audio-volume-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+
+    .btn-mute {
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: transparent;
+      border: 1px solid transparent;
+      color: $body-color;
+      opacity: 0.6;
+      cursor: pointer;
+      &:hover { opacity: 1; background: rgba($dark-blue, 0.08); }
+    }
+
+    .audio-volume { @include audio-range($strong-orange); flex: 0 0 90px; width: 90px; }
+  }
+
+  .btn-menu {
+    flex: 0 0 auto;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid transparent;
+    color: $body-color;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    
+    &:hover {
+      opacity: 1;
+      background: rgba($dark-blue, 0.08);
+      border-color: rgba($dark-blue, 0.1);
+    }
+  }
+}
+
+@mixin audio-widget-mobile-styles {
+  left: 8px; right: 8px; bottom: 8px;
+  padding: 8px 12px;
+
+  .audio-bar { gap: 10px; }
+  
+  // Hide components on mobile to keep it clean
+  .station-name { display: none; }
+  .js-back, .js-forward { display: none !important; }
+  .audio-volume-group, 
+  .audio-progress-group, 
+  .btn-menu { display: none !important; }
+  
+  .audio-meta { flex: 1 1 auto; }
+  .audio-meta .track-cover { 
+    width: 44px; 
+    height: 44px; 
+    flex-basis: 44px; 
+    cursor: pointer; // indicates it's clickable
+  }
+  
+  .audio-controls {
+    .btn-play { width: 44px; height: 44px; min-width: 44px; min-height: 44px; }
+    .btn-skip { width: 34px; height: 34px; min-width: 34px; min-height: 34px; }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .audio-widget:not(.audio-widget-desktop) {
+    @include audio-widget-mobile-styles;
+  }
+}
+
+// Helper class for showcase
+.audio-widget-mobile {
+  @include audio-widget-mobile-styles;
+}
+
+// Utility to override position for showcasing inline
+.audio-widget-inline {
+  display: block !important;
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 100%;
+}
+
+@media (max-width: 419.98px) {
+  .audio-widget {
+    // If further adjustments are needed on very small screens
+  }
+}
