@@ -58,3 +58,11 @@ To use this compiled CSS theme in your ASP.NET Core project:
 ```
 
 Alternatively, you could configure your ASP.NET Core build process or tools like LibMan / WebCompiler to automatically compile the SCSS files from this repository directly into your `wwwroot/css/` directory.
+
+First Publication & Intellectual Property Notice
+
+"Ohrbob" and its associated visual logo were first published on 6.10.2026 by Kai Wegner in Germany/EU. 
+
+- Project Title Rights: Claimed under § 5 Abs. 3 MarkenG (Werktitel).
+- Visual Assets & Logo: Protected under EU Unregistered Community Design (Regulation EC No 6/2002).
+- Copyright & Source Code: All rights reserved under German Copyright Law (UrhG) and licensed exclusively under the terms of PolyForm Noncommercial 1.0.0.

@@ -3,15 +3,24 @@
 
 set -e
 
+# Always run from the repo root (this script lives in scripts/).
+# Resolve the target dir BEFORE cd, so relative paths work
+# regardless of where the script is invoked from.
+INVOKED_FROM="$(pwd)"
+TARGET_ARG="${1:-../ohrbob2/Ohrbob.Web}"
+case "$TARGET_ARG" in
+    /*) TARGET_DIR="$TARGET_ARG";;
+    *) TARGET_DIR="$INVOKED_FROM/$TARGET_ARG";;
+esac
+# Strip any trailing slashes
+TARGET_DIR="${TARGET_DIR%/}"
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+cd "$SCRIPT_DIR/.."
+
 # Build the theme
 echo "Building the Ohrbob theme..."
 npm run build
-
-# Determine target directory (allow overriding via first argument)
-# The expected argument is the path to the Ohrbob.Web project folder
-TARGET_DIR="${1:-../ohrbob2/Ohrbob.Web}"
-# Strip any trailing slashes
-TARGET_DIR="${TARGET_DIR%/}"
 
 TARGET_WWWROOT="$TARGET_DIR/wwwroot"
 TARGET_DOCSROOT="$TARGET_DIR/docs"
@@ -58,38 +67,38 @@ fi
 if [ -d "images" ]; then
     echo "Copying images directory..."
     mkdir -p "$TARGET_WWWROOT/images"
-    cp -r images/* "$TARGET_WWWROOT/images/"
+    # Copy public images, excluding archive/ and source/ working files
+    for f in images/*; do
+        case "$f" in
+            images/archive|images/source) continue;;
+            *) cp -r "$f" "$TARGET_WWWROOT/images/";;
+        esac
+    done
 elif [ -d "img" ]; then
     echo "Copying img directory..."
     mkdir -p "$TARGET_WWWROOT/images"
     cp -r img/* "$TARGET_WWWROOT/images/"
 fi
 
-# Copy any root level image files if they exist
-if ls *.png *.jpg *.jpeg *.gif *.svg *.ico 1> /dev/null 2>&1; then
-    echo "Copying root level images..."
-    mkdir -p "$TARGET_WWWROOT/images"
-    cp *.png *.jpg *.jpeg *.gif *.svg *.ico "$TARGET_WWWROOT/images/" 2>/dev/null || true
-fi
-
 # Ensure ohrbob-logo.svg is converted to favicon and copied
-if [ -f "ohrbob-logo.svg" ]; then
-    echo "Handling favicons from ohrbob-logo.svg..."
+LOGO_SVG="images/ohrbob-logo.svg"
+if [ -f "$LOGO_SVG" ]; then
+    echo "Handling favicons from $LOGO_SVG..."
     if command -v magick &> /dev/null; then
         # Use extremely high density and Lanczos filter for the sharpest possible downscaling
-        magick -density 2048 -background none ohrbob-logo.svg -filter Lanczos -define icon:auto-resize=64,48,32,16 favicon.ico || true
-        magick -density 2048 -background none ohrbob-logo.svg -filter Lanczos -resize 192x192 favicon.png || true
-        magick -density 2048 -background none ohrbob-logo.svg -filter Lanczos -resize 180x180 apple-touch-icon.png || true
+        magick -density 2048 -background none "$LOGO_SVG" -filter Lanczos -define icon:auto-resize=64,48,32,16 images/favicon.ico || true
+        magick -density 2048 -background none "$LOGO_SVG" -filter Lanczos -resize 192x192 images/favicon.png || true
+        magick -density 2048 -background none "$LOGO_SVG" -filter Lanczos -resize 180x180 images/apple-touch-icon.png || true
     fi
     # Copy favicons to the root of wwwroot as expected by most browsers
-    cp favicon.ico favicon.png apple-touch-icon.png "$TARGET_WWWROOT/" 2>/dev/null || true
+    cp images/favicon.ico images/favicon.png images/apple-touch-icon.png "$TARGET_WWWROOT/" 2>/dev/null || true
 fi
 
 # Ensure all logo files are also explicitly copied to images (in case the wildcard missed something)
-if ls *logo* 1> /dev/null 2>&1; then
+if ls images/*logo* 1> /dev/null 2>&1; then
     echo "Ensuring all logos are copied..."
     mkdir -p "$TARGET_WWWROOT/images"
-    cp -r *logo* "$TARGET_WWWROOT/images/" 2>/dev/null || true
+    cp -r images/*logo* "$TARGET_WWWROOT/images/" 2>/dev/null || true
 fi
 
 echo "Theme successfully updated in Ohrbob.Web!"

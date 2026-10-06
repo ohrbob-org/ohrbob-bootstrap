@@ -5,7 +5,7 @@
     "build": "sass --quiet-deps scss/theme.scss css/theme.css && node scripts/capture-screenshot.mjs",
     "watch": "sass --watch --quiet-deps scss/theme.scss css/theme.css",
     "test": "node --test 'test/**/*.test.mjs'",
-    "apply": "./apply-theme.sh"
+    "apply": "./scripts/apply-theme.sh"
   },
   "dependencies": {
     "bootstrap": "^5.3.2"
