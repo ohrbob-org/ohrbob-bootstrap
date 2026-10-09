@@ -12276,6 +12276,17 @@ textarea.form-control-lg {
   background: rgba(0, 25, 87, 0.08);
   border-color: rgba(0, 25, 87, 0.1);
 }
+.audio-widget .audio-expanded-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1099; /* Just below audio-expanded-card which is 1100 */
+  background: rgba(0, 25, 87, 0.45); /* Elegant dark-blue semi-transparent tint */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
 .audio-widget .audio-expanded-card {
   position: fixed;
   left: 8px;
@@ -12288,11 +12299,11 @@ textarea.form-control-lg {
   flex-direction: column;
   overflow: hidden;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.95); /* Less translucent background */
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  box-shadow: 0 -8px 32px rgba(0, 25, 87, 0.15);
+  box-shadow: 0 -8px 32px rgba(0, 25, 87, 0.18);
   transform: translateY(105%);
   opacity: 0;
   pointer-events: none;
@@ -12590,10 +12601,18 @@ textarea.form-control-lg {
   border-radius: 20px !important;
   flex-shrink: 0;
 }
+.audio-widget.is-expanded .audio-expanded-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
 .audio-widget.is-expanded .audio-expanded-card {
   transform: translateY(0);
   opacity: 1;
   pointer-events: auto;
+}
+.audio-widget.audio-widget-inline .audio-expanded-backdrop {
+  position: absolute;
+  z-index: 99;
 }
 .audio-widget.audio-widget-inline .audio-expanded-card {
   position: absolute;

@@ -231,6 +231,9 @@ class AudioWidget extends HTMLElement {
                 <button type="button" class="btn-menu js-settings" aria-label="Settings">${ICONS.settings}</button>
             </div>
 
+            <!-- Fullscreen Blur Backdrop Overlay -->
+            <div class="audio-expanded-backdrop js-close-expanded"></div>
+
             <!-- Slide-Up Card Overlay -->
             <div class="audio-expanded-card">
                 <div class="expanded-header">
@@ -428,13 +431,13 @@ class AudioWidget extends HTMLElement {
             });
         }
 
-        // Collapse close button
-        const closeExpanded = this.querySelector('.js-close-expanded');
-        if (closeExpanded) {
-            closeExpanded.addEventListener('click', () => {
+        // Collapse close triggers (both top down-arrow and the background backdrop!)
+        const closeExpandedTriggers = this.querySelectorAll('.js-close-expanded');
+        closeExpandedTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
                 this.isExpanded = false;
             });
-        }
+        });
 
         // Navigation Card Jump Event Dispatches
         const jumpPrevBtn = this.querySelector('.js-jump-prev');
