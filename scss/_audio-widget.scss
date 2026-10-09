@@ -264,6 +264,312 @@
       border-color: rgba($dark-blue, 0.1);
     }
   }
+
+  .audio-expanded-card {
+    position: fixed;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    height: 80vh;
+    max-height: 80vh;
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 -8px 32px rgba(0, 25, 87, 0.15);
+    
+    transform: translateY(105%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+
+    .expanded-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      border-bottom: 1px solid rgba(0, 25, 87, 0.08);
+
+      .btn-close-expanded {
+        background: transparent;
+        border: none;
+        color: $body-color;
+        opacity: 0.6;
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background-color 0.2s;
+
+        &:hover {
+          opacity: 1;
+          background-color: rgba(0, 25, 87, 0.05);
+        }
+      }
+
+      .expanded-header-title {
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: rgba($dark-blue, 0.6);
+      }
+    }
+
+    .expanded-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      scrollbar-width: thin;
+      
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: rgba(0, 25, 87, 0.1);
+        border-radius: 2px;
+      }
+
+      .expanded-cover-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 8px;
+
+        .expanded-cover {
+          width: 160px;
+          height: 160px;
+          border-radius: 16px;
+          object-fit: cover;
+          box-shadow: 0 8px 24px rgba(0, 25, 87, 0.15);
+          background-color: rgba($dark-blue, 0.08);
+        }
+
+        .expanded-cover-empty {
+          width: 160px;
+          height: 160px;
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 4rem;
+          color: rgba($dark-blue, 0.4);
+          box-shadow: 0 8px 24px rgba(0, 25, 87, 0.15);
+          background-color: rgba($dark-blue, 0.08);
+        }
+      }
+
+      .expanded-info {
+        text-align: center;
+        
+        .expanded-station {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.72rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.8px;
+          color: $primary;
+
+          .station-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: $primary;
+            box-shadow: 0 0 5px $primary;
+          }
+        }
+
+        .expanded-title {
+          display: block;
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: $dark-blue;
+          margin-top: 6px;
+          margin-bottom: 2px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .expanded-artist {
+          display: block;
+          font-size: 0.9rem;
+          opacity: 0.75;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .expanded-controls-group {
+        background: rgba(0, 25, 87, 0.03);
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 25, 87, 0.04);
+
+        .expanded-progress-row {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 12px;
+
+          .time-elapsed, .time-total {
+            font-size: 0.72rem;
+            font-variant-numeric: tabular-nums;
+            opacity: 0.7;
+            min-width: 38px;
+          }
+          .time-elapsed { text-align: right; }
+          .js-expanded-progress {
+            @include audio-range($light-blue);
+            flex: 1;
+            min-width: 0;
+          }
+        }
+
+        .expanded-controls {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 20px;
+
+          .btn-play {
+            width: 52px;
+            height: 52px;
+            border-radius: 50% !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            svg { display: block; }
+          }
+
+          .btn-skip {
+            width: 38px;
+            height: 38px;
+            border-radius: 50% !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            svg { display: block; }
+          }
+        }
+      }
+
+      .episode-nav-card {
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(0, 25, 87, 0.06);
+        border-radius: 16px;
+        padding: 12px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .episode-nav-label {
+          font-size: 0.68rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: rgba($dark-blue, 0.5);
+        }
+
+        .episode-nav-content {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+
+          .episode-nav-cover-container {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+
+            .episode-nav-cover {
+              width: 44px;
+              height: 44px;
+              border-radius: 8px;
+              object-fit: cover;
+            }
+
+            .episode-nav-cover-empty {
+              width: 44px;
+              height: 44px;
+              border-radius: 8px;
+              background-color: rgba($dark-blue, 0.06);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.1rem;
+              color: rgba($dark-blue, 0.3);
+            }
+          }
+
+          .episode-nav-info {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+
+            .episode-nav-title {
+              font-size: 0.88rem;
+              font-weight: 700;
+              color: $dark-blue;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+
+            .episode-nav-artist {
+              font-size: 0.78rem;
+              opacity: 0.75;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+
+          .btn-jump {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 20px !important;
+            flex-shrink: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &.is-expanded {
+    .audio-expanded-card {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  &.audio-widget-inline {
+    .audio-expanded-card {
+      position: absolute;
+      height: calc(100% - 16px);
+      max-height: none;
+      bottom: 8px;
+      z-index: 100;
+    }
+  }
 }
 
 @mixin audio-widget-mobile-styles {
@@ -316,6 +622,7 @@
 
 @media (max-width: 419.98px) {
   .audio-widget {
-    // If further adjustments are needed on very small screens
+    // Adjust bottom-bar padding slightly on ultra-small screens so it compiles non-empty
+    padding: 8px 10px;
   }
 }

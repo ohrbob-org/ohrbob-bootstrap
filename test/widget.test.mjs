@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mount } from './helpers/dom.mjs';
+import { mount, record } from './helpers/dom.mjs';
 
 test('renders full-width bar structure', () => {
     const { el } = mount({ station: 'Test', track: 'T', artist: 'A' });
@@ -16,4 +16,72 @@ test('renders full-width bar structure', () => {
         'audio-volume-group',
         'btn-menu'
     ]);
+});
+
+test('renders expanded card structures', () => {
+    const { el } = mount({ station: 'Test', track: 'T', artist: 'A' });
+    const card = el.querySelector('.audio-expanded-card');
+    assert.ok(card);
+    
+    const title = card.querySelector('.expanded-title');
+    assert.equal(title.textContent, 'T');
+});
+
+test('manages isExpanded property and updates CSS classes and emits events', () => {
+    const { el } = mount();
+    const log = record(el, ['expand', 'collapse']);
+    
+    assert.equal(el.isExpanded, false);
+    assert.ok(!el.classList.contains('is-expanded'));
+    
+    el.isExpanded = true;
+    assert.equal(el.isExpanded, true);
+    assert.ok(el.classList.contains('is-expanded'));
+    assert.equal(log[0].type, 'expand');
+    
+    el.isExpanded = false;
+    assert.equal(el.isExpanded, false);
+    assert.ok(!el.classList.contains('is-expanded'));
+    assert.equal(log[1].type, 'collapse');
+});
+
+test('parses and populates next and previous episode cards', () => {
+    const nextEpisode = { track: 'Next Track', artist: 'Next Artist', duration: 1200 };
+    const prevEpisode = { track: 'Prev Track', artist: 'Prev Artist', duration: 600 };
+    
+    const { el } = mount({
+        'next-episode': JSON.stringify(nextEpisode),
+        'prev-episode': JSON.stringify(prevEpisode)
+    });
+    
+    const nextTitle = el.querySelector('.next-episode-card .episode-nav-title');
+    const nextArtist = el.querySelector('.next-episode-card .episode-nav-artist');
+    assert.equal(nextTitle.textContent, 'Next Track');
+    assert.equal(nextArtist.textContent, 'Next Artist');
+    
+    const prevTitle = el.querySelector('.prev-episode-card .episode-nav-title');
+    const prevArtist = el.querySelector('.prev-episode-card .episode-nav-artist');
+    assert.equal(prevTitle.textContent, 'Prev Track');
+    assert.equal(prevArtist.textContent, 'Prev Artist');
+});
+
+test('emits jumpnext and jumpprev events when navigation jump triggers are clicked', () => {
+    const nextEpisode = { track: 'Next Track', artist: 'Next Artist' };
+    const prevEpisode = { track: 'Prev Track', artist: 'Prev Artist' };
+    
+    const { el } = mount({
+        'next-episode': JSON.stringify(nextEpisode),
+        'prev-episode': JSON.stringify(prevEpisode)
+    });
+    const log = record(el, ['jumpnext', 'jumpprev']);
+    
+    const nextBtn = el.querySelector('.js-jump-next');
+    nextBtn.click();
+    assert.equal(log[0].type, 'jumpnext');
+    assert.equal(log[0].detail.episode.track, 'Next Track');
+    
+    const prevBtn = el.querySelector('.js-jump-prev');
+    prevBtn.click();
+    assert.equal(log[1].type, 'jumpprev');
+    assert.equal(log[1].detail.episode.track, 'Prev Track');
 });

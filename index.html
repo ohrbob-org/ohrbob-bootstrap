@@ -299,7 +299,9 @@
                                     station="Radio 1"
                                     track="Cosmic Journey"
                                     artist="Space Explorer"
-                                    cover="https://images.unsplash.com/photo-1619983081563-430f63602796?auto=format&fit=crop&q=80&w=150&h=150">
+                                    cover="https://images.unsplash.com/photo-1619983081563-430f63602796?auto=format&fit=crop&q=80&w=150&h=150"
+                                    next-episode='{"track":"Secrets of the Deep","artist":"Oceanographer","cover":"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=150&h=150","duration":3600}'
+                                    prev-episode='{"track":"First Steps","artist":"Neil Armstrong","cover":"https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=150&h=150","duration":1800}'>
                                 </audio-widget>
                             </div>
                             
@@ -396,6 +398,61 @@
             widget.addEventListener('back', () => console.log('Previous track requested.'));
             widget.addEventListener('settings', () => console.log('Settings opened.'));
             widget.addEventListener('coverclick', () => console.log('Cover art tapped!'));
+
+            widget.addEventListener('jumpnext', (e) => {
+                console.log('Jump next triggered with', e.detail.episode);
+                const ep = e.detail.episode;
+                if (!ep) return;
+                
+                // Swap episodes: next becomes current, current becomes previous
+                const currentEp = {
+                    track: widget.getAttribute('track'),
+                    artist: widget.getAttribute('artist'),
+                    cover: widget.getAttribute('cover'),
+                    duration: widget.duration
+                };
+                
+                widget.setAttribute('track', ep.track);
+                widget.setAttribute('artist', ep.artist || '');
+                if (ep.cover) widget.setAttribute('cover', ep.cover);
+                widget.duration = ep.duration || 1800;
+                widget.currentTime = 0;
+                
+                widget.prevEpisode = currentEp;
+                widget.nextEpisode = {
+                    track: "The Future of AI",
+                    artist: "Computer Scientist",
+                    cover: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=150&h=150",
+                    duration: 2400
+                };
+            });
+
+            widget.addEventListener('jumpprev', (e) => {
+                console.log('Jump prev triggered with', e.detail.episode);
+                const ep = e.detail.episode;
+                if (!ep) return;
+                
+                const currentEp = {
+                    track: widget.getAttribute('track'),
+                    artist: widget.getAttribute('artist'),
+                    cover: widget.getAttribute('cover'),
+                    duration: widget.duration
+                };
+
+                widget.setAttribute('track', ep.track);
+                widget.setAttribute('artist', ep.artist || '');
+                if (ep.cover) widget.setAttribute('cover', ep.cover);
+                widget.duration = ep.duration || 1800;
+                widget.currentTime = 0;
+                
+                widget.nextEpisode = currentEp;
+                widget.prevEpisode = {
+                    track: "Big Bang Theories",
+                    artist: "Astrophysicist",
+                    cover: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=150&h=150",
+                    duration: 3200
+                };
+            });
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
