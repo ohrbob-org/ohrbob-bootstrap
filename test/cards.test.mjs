@@ -146,3 +146,18 @@ test('played episodes dim the title but keep a button', () => {
     const css = compileTheme();
     assert.match(css, /\.card-episode\.is-played\s+\.card-episode-play\s*{[^}]*background-color/s);
 });
+
+test('showcase documents all card components', () => {
+    const html = readFileSync(path.join(root, 'index.html'), 'utf8');
+    for (const marker of [
+        'card-station',
+        'card-feed',
+        'card-episode',
+        'is-playing',
+        'is-played',
+        'has-progress',
+        'bootstrap-icons@1.11.3',
+    ]) {
+        assert.ok(html.includes(marker), marker);
+    }
+});

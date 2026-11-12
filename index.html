@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/theme.css">
     <!-- Prism for syntax highlighting -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
     <div class="container mt-5">
@@ -318,6 +319,193 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <section class="mb-5">
+            <h2 class="mb-4">Card Components</h2>
+            <p>Three cards for the three content levels. A <strong>station</strong> collects feeds and is the dark anchor; a <strong>feed</strong> is one podcast show in violet glass; an <strong>episode</strong> is one listenable row in warm paper.</p>
+
+            <h5 class="mt-4">Station</h5>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3 mb-3">
+                <div class="col">
+                    <div class="card-station h-100">
+                        <div class="card-station-art">
+                            <img class="card-station-cover" src="https://images.unsplash.com/photo-1619983081563-430f63602796?auto=format&fit=crop&q=80&w=300&h=300" alt="">
+                            <img class="card-station-cover" src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&q=80&w=300&h=300" alt="">
+                            <img class="card-station-cover" src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&q=80&w=300&h=300" alt="">
+                            <img class="card-station-cover" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=300&h=300" alt="">
+                            <span class="card-station-badge" aria-hidden="true"><i class="bi bi-broadcast"></i></span>
+                            <span class="card-station-count">4 podcasts</span>
+                        </div>
+                        <div class="card-station-body">
+                            <i class="bi bi-soundwave card-station-watermark" aria-hidden="true"></i>
+                            <div class="card-station-kicker"><i class="bi bi-broadcast" aria-hidden="true"></i> Station</div>
+                            <h3 class="card-station-title"><a class="stretched-link" href="#">Laberpodcasts</a></h3>
+                            <p class="card-station-meta"><strong>411</strong> episodes · Kai</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-station h-100">
+                        <div class="card-station-art">
+                            <img class="card-station-cover" src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&q=80&w=300&h=300" alt="">
+                            <span class="card-station-badge" aria-hidden="true"><i class="bi bi-broadcast"></i></span>
+                            <span class="card-station-count">1 podcast</span>
+                        </div>
+                        <div class="card-station-body">
+                            <i class="bi bi-soundwave card-station-watermark" aria-hidden="true"></i>
+                            <div class="card-station-kicker"><i class="bi bi-broadcast" aria-hidden="true"></i> Station</div>
+                            <h3 class="card-station-title"><a class="stretched-link" href="#">Kopfkino</a></h3>
+                            <p class="card-station-meta"><strong>42</strong> episodes · Jo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-station is-empty h-100">
+                        <div class="card-station-art">
+                            <div class="card-station-cover card-station-cover-empty" aria-hidden="true">N</div>
+                            <span class="card-station-badge" aria-hidden="true"><i class="bi bi-broadcast"></i></span>
+                            <span class="card-station-count">0 podcasts</span>
+                        </div>
+                        <div class="card-station-body">
+                            <i class="bi bi-soundwave card-station-watermark" aria-hidden="true"></i>
+                            <div class="card-station-kicker"><i class="bi bi-broadcast" aria-hidden="true"></i> Station</div>
+                            <h3 class="card-station-title"><a class="stretched-link" href="#">Nachtcafé</a></h3>
+                            <p class="card-station-meta"><strong>0</strong> episodes · Anna</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-station h-100">
+                        <div class="card-station-art">
+                            <img class="card-station-cover" src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&q=80&w=300&h=300" alt="">
+                            <img class="card-station-cover" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=300&h=300" alt="">
+                            <img class="card-station-cover" src="https://images.unsplash.com/photo-1619983081563-430f63602796?auto=format&fit=crop&q=80&w=300&h=300" alt="">
+                            <span class="card-station-badge" aria-hidden="true"><i class="bi bi-broadcast"></i></span>
+                            <span class="card-station-count">3 podcasts</span>
+                        </div>
+                        <div class="card-station-body">
+                            <i class="bi bi-soundwave card-station-watermark" aria-hidden="true"></i>
+                            <div class="card-station-kicker"><i class="bi bi-broadcast" aria-hidden="true"></i> Station</div>
+                            <h3 class="card-station-title"><a class="stretched-link" href="#">Sonntagsbrunch</a></h3>
+                            <p class="card-station-meta"><strong>512</strong> episodes · Mia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<pre class="mb-4" style="overflow-x: auto;"><code class="language-html">&lt;div class="card-station"&gt;
+  &lt;div class="card-station-art"&gt;
+    &lt;img class="card-station-cover" src="cover.jpg" alt=""&gt;
+    &lt;span class="card-station-badge"&gt;&lt;i class="bi bi-broadcast"&gt;&lt;/i&gt;&lt;/span&gt;
+    &lt;span class="card-station-count"&gt;4 podcasts&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="card-station-body"&gt;
+    &lt;div class="card-station-kicker"&gt;Station&lt;/div&gt;
+    &lt;h3 class="card-station-title"&gt;&lt;a class="stretched-link" href="#"&gt;Laberpodcasts&lt;/a&gt;&lt;/h3&gt;
+    &lt;p class="card-station-meta"&gt;&lt;strong&gt;411&lt;/strong&gt; episodes&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+            <h5 class="mt-4">Feed</h5>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 mb-3">
+                <div class="col">
+                    <div class="card-feed h-100">
+                        <div class="card-feed-art">
+                            <img class="card-feed-cover" src="https://images.unsplash.com/photo-1619983081563-430f63602796?auto=format&fit=crop&q=80&w=400&h=400" alt="">
+                            <span class="card-feed-badge" aria-hidden="true"><i class="bi bi-rss"></i></span>
+                            <button class="card-feed-add" type="button" aria-label="Add to a station"><i class="bi bi-plus-lg" aria-hidden="true"></i></button>
+                        </div>
+                        <div class="card-feed-body">
+                            <div class="card-feed-kicker"><i class="bi bi-rss" aria-hidden="true"></i> Feed</div>
+                            <h3 class="card-feed-title"><a class="stretched-link" href="#">Kalk &amp; Welk</a></h3>
+                            <p class="card-feed-author">Die fabelhaften Boomer Boys</p>
+                            <p class="card-feed-meta">104 episodes · Updated 12 Nov</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-feed h-100">
+                        <div class="card-feed-art">
+                            <img class="card-feed-cover" src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&q=80&w=400&h=400" alt="">
+                            <span class="card-feed-badge" aria-hidden="true"><i class="bi bi-rss"></i></span>
+                        </div>
+                        <div class="card-feed-body">
+                            <div class="card-feed-kicker"><i class="bi bi-rss" aria-hidden="true"></i> Feed</div>
+                            <h3 class="card-feed-title"><a class="stretched-link" href="#">Talk ohne Gast</a></h3>
+                            <p class="card-feed-author">Zeit Online</p>
+                            <p class="card-feed-meta">307 episodes · Updated 11 Nov</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-feed h-100">
+                        <div class="card-feed-art">
+                            <div class="card-feed-cover card-feed-cover-empty" aria-hidden="true">L</div>
+                            <span class="card-feed-badge" aria-hidden="true"><i class="bi bi-rss"></i></span>
+                        </div>
+                        <div class="card-feed-body">
+                            <div class="card-feed-kicker"><i class="bi bi-rss" aria-hidden="true"></i> Feed</div>
+                            <h3 class="card-feed-title"><a class="stretched-link" href="#">Lanz &amp; Precht</a></h3>
+                            <p class="card-feed-author">ZDF</p>
+                            <p class="card-feed-meta">72 episodes · Updated 10 Nov</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<pre class="mb-4" style="overflow-x: auto;"><code class="language-html">&lt;div class="card-feed"&gt;
+  &lt;div class="card-feed-art"&gt;
+    &lt;img class="card-feed-cover" src="cover.jpg" alt=""&gt;
+    &lt;span class="card-feed-badge"&gt;&lt;i class="bi bi-rss"&gt;&lt;/i&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="card-feed-body"&gt;
+    &lt;div class="card-feed-kicker"&gt;Feed&lt;/div&gt;
+    &lt;h3 class="card-feed-title"&gt;&lt;a class="stretched-link" href="#"&gt;Kalk &amp;amp; Welk&lt;/a&gt;&lt;/h3&gt;
+    &lt;p class="card-feed-author"&gt;Die fabelhaften Boomer Boys&lt;/p&gt;
+    &lt;p class="card-feed-meta"&gt;104 episodes · Updated 12 Nov&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+            <h5 class="mt-4">Episode</h5>
+            <div class="d-flex flex-column gap-2 mb-3">
+                <div class="card-episode">
+                    <span class="card-episode-badge" aria-hidden="true"><i class="bi bi-mic"></i></span>
+                    <div class="card-episode-body">
+                        <div class="card-episode-kicker"><i class="bi bi-mic" aria-hidden="true"></i> Episode</div>
+                        <h3 class="card-episode-title"><a class="stretched-link" href="#">Folge 103: Der Diskurs ist kaputt</a></h3>
+                        <p class="card-episode-meta">Kalk &amp; Welk · 5 Nov · 58 min</p>
+                    </div>
+                    <button class="card-episode-play" type="button" aria-label="Play episode"><i class="bi bi-play-fill" aria-hidden="true"></i></button>
+                </div>
+                <div class="card-episode is-playing has-progress">
+                    <span class="card-episode-badge" aria-hidden="true"><i class="bi bi-mic"></i></span>
+                    <div class="card-episode-body">
+                        <div class="card-episode-kicker"><i class="bi bi-mic" aria-hidden="true"></i> Episode · playing</div>
+                        <h3 class="card-episode-title"><a class="stretched-link" href="#">Folge 104: Warum wir immer noch über Boomer reden</a></h3>
+                        <p class="card-episode-meta">Kalk &amp; Welk · 12 Nov · 22 min left</p>
+                        <div class="card-episode-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="38"><span style="width: 38%"></span></div>
+                    </div>
+                    <button class="card-episode-play" type="button" aria-label="Pause episode"><i class="bi bi-pause-fill" aria-hidden="true"></i></button>
+                </div>
+                <div class="card-episode is-played">
+                    <span class="card-episode-badge" aria-hidden="true"><i class="bi bi-mic"></i></span>
+                    <div class="card-episode-body">
+                        <div class="card-episode-kicker"><i class="bi bi-mic" aria-hidden="true"></i> Episode · played</div>
+                        <h3 class="card-episode-title"><a class="stretched-link" href="#">Folge 102: Was war nochmal normal?</a></h3>
+                        <p class="card-episode-meta">Kalk &amp; Welk · 29 Oct · 61 min</p>
+                    </div>
+                    <button class="card-episode-play" type="button" aria-label="Play again"><i class="bi bi-check-lg" aria-hidden="true"></i></button>
+                </div>
+            </div>
+<pre class="mb-4" style="overflow-x: auto;"><code class="language-html">&lt;div class="card-episode is-playing has-progress"&gt;
+  &lt;span class="card-episode-badge"&gt;&lt;i class="bi bi-mic"&gt;&lt;/i&gt;&lt;/span&gt;
+  &lt;div class="card-episode-body"&gt;
+    &lt;div class="card-episode-kicker"&gt;Episode&lt;/div&gt;
+    &lt;h3 class="card-episode-title"&gt;&lt;a class="stretched-link" href="#"&gt;Folge 104&lt;/a&gt;&lt;/h3&gt;
+    &lt;p class="card-episode-meta"&gt;Kalk &amp;amp; Welk · 12 Nov · 22 min left&lt;/p&gt;
+    &lt;div class="card-episode-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="38"&gt;&lt;span style="width: 38%"&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="card-episode-play" type="button" aria-label="Pause episode"&gt;&lt;i class="bi bi-pause-fill"&gt;&lt;/i&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
         </section>
 
         <h2 class="mb-4">Components</h2>
