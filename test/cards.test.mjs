@@ -96,3 +96,53 @@ test('feed titles truncate and the badge hangs off the cover', () => {
     const css = compileTheme();
     assert.match(css, /\.card-feed-badge\s*{[^}]*bottom:\s*-15px/s);
 });
+
+test('episode card states are compiled', () => {
+    const css = compileTheme();
+    for (const selector of [
+        '.card-episode',
+        '.card-episode-badge',
+        '.card-episode-play',
+        '.card-episode.is-playing',
+        '.card-episode.is-played',
+        '.card-episode.has-progress .card-episode-progress',
+    ]) {
+        assert.ok(css.includes(selector), selector);
+    }
+    assert.match(css, /\.card-episode\s*{[^}]*border-left:\s*4px\s+solid/s);
+});
+
+test('episode rows are horizontal and paused progress stays visible', () => {
+    const window = cardWindow(`
+        <div class="card-episode"><span class="card-episode-badge">M</span>
+            <div class="card-episode-body">
+                <h3 class="card-episode-title"><a class="stretched-link" href="#">Episode</a></h3>
+                <div class="card-episode-progress"><span style="width: 38%"></span></div>
+            </div>
+            <button class="card-episode-play">P</button>
+        </div>
+        <div class="card-episode has-progress"><div class="card-episode-body">
+            <div class="card-episode-progress"><span style="width: 38%"></span></div>
+        </div></div>`);
+    const doc = window.document;
+    const plain = doc.querySelectorAll('.card-episode')[0];
+    assert.equal(window.getComputedStyle(plain).display, 'flex');
+    assert.equal(window.getComputedStyle(plain.querySelector('.card-episode-progress')).display, 'none');
+    const paused = doc.querySelectorAll('.card-episode')[1];
+    assert.equal(window.getComputedStyle(paused.querySelector('.card-episode-progress')).display, 'block');
+});
+
+test('played episodes dim the title but keep a button', () => {
+    const window = cardWindow(`
+        <div class="card-episode is-played">
+            <div class="card-episode-body">
+                <h3 class="card-episode-title">Episode</h3>
+            </div>
+            <button class="card-episode-play">C</button>
+        </div>`);
+    const doc = window.document;
+    const opacity = parseFloat(window.getComputedStyle(doc.querySelector('.card-episode-title')).opacity);
+    assert.ok(opacity < 1, `expected dimmed title, got opacity ${opacity}`);
+    const css = compileTheme();
+    assert.match(css, /\.card-episode\.is-played\s+\.card-episode-play\s*{[^}]*background-color/s);
+});
