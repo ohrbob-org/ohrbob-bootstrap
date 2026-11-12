@@ -156,3 +156,143 @@
 .card-station.is-empty .card-station-cover-empty {
   flex: 1 1 100%;
 }
+
+.card-feed {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 15px;
+  background: #f4f3ff;
+  border: 1px solid rgba($light-blue, 0.28);
+  box-shadow: 0 8px 22px rgba($light-blue, 0.12);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgba($light-blue, 0.5);
+    box-shadow: 0 12px 28px rgba($light-blue, 0.2);
+  }
+
+  &:focus-within {
+    outline: 2px solid rgba($light-blue, 0.55);
+    outline-offset: 2px;
+  }
+}
+
+.card-feed-art {
+  position: relative;
+}
+
+.card-feed-cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: linear-gradient(135deg, $light-blue, $dark-blue);
+}
+
+.card-feed-cover-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, $light-blue, $dark-blue);
+}
+
+.card-feed-badge {
+  position: absolute;
+  left: 8px;
+  bottom: -15px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: $light-blue;
+  border: 2px solid #fff;
+  color: #fff;
+  font-size: 13px;
+  box-shadow: 0 3px 10px rgba($dark-blue, 0.28);
+}
+
+.card-feed-add {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: $strong-orange;
+  color: #fff;
+  font-size: 20px;
+  box-shadow: 0 4px 14px rgba($strong-orange, 0.45);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba($strong-orange, 0.55);
+  }
+}
+
+.card-feed-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  padding: 19px 10px 11px;
+}
+
+.card-feed-kicker {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: $light-blue;
+}
+
+.card-feed-title {
+  margin: 2px 0 1px;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.card-feed-author {
+  margin: 0 0 4px;
+  font-size: 10px;
+  color: rgba($dark-blue, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-feed-meta {
+  margin: 0;
+  font-size: 9.5px;
+  line-height: 1.35;
+  color: rgba($dark-blue, 0.55);
+}

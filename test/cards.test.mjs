@@ -63,3 +63,36 @@ test('station badge is a circular orange mark', () => {
     assert.equal(style.borderRadius, '50%');
     assert.match(style.backgroundColor, /252,\s*93,\s*0/);
 });
+
+test('feed card styles are compiled', () => {
+    const css = compileTheme();
+    for (const selector of [
+        '.card-feed',
+        '.card-feed-badge',
+        '.card-feed-add',
+        '.card-feed-cover-empty',
+        '.card-feed-title',
+    ]) {
+        assert.ok(css.includes(selector), selector);
+    }
+    assert.match(css, /\.card-feed-cover\s*{[^}]*aspect-ratio:\s*1\s*\/\s*1/s);
+});
+
+test('feed titles truncate and the badge hangs off the cover', () => {
+    const window = cardWindow(`
+        <div class="card-feed">
+            <div class="card-feed-art">
+                <img class="card-feed-cover">
+                <span class="card-feed-badge">R</span>
+            </div>
+            <div class="card-feed-body">
+                <h3 class="card-feed-title"><a class="stretched-link" href="#">A very long podcast name</a></h3>
+            </div>
+        </div>`);
+    const doc = window.document;
+    const title = window.getComputedStyle(doc.querySelector('.card-feed-title'));
+    assert.equal(title.textOverflow, 'ellipsis');
+    assert.equal(title.whiteSpace, 'nowrap');
+    const css = compileTheme();
+    assert.match(css, /\.card-feed-badge\s*{[^}]*bottom:\s*-15px/s);
+});
