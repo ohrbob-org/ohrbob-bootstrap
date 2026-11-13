@@ -1,6 +1,7 @@
 {
   "name": "ohrbob-bootstrap",
   "version": "1.0.0",
+  "license": "LGPL-3.0-or-later",
   "scripts": {
     "build": "sass --quiet-deps scss/theme.scss css/theme.css && node scripts/capture-screenshot.mjs",
     "watch": "sass --watch --quiet-deps scss/theme.scss css/theme.css",

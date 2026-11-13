@@ -65,4 +65,4 @@ Alternatively, you could configure your ASP.NET Core build process or tools like
 
 - Project Title Rights: Claimed under § 5 Abs. 3 MarkenG (Werktitel).
 - Visual Assets & Logo: Protected under EU Unregistered Community Design (Regulation EC No 6/2002).
-- Copyright & Source Code: All rights reserved under German Copyright Law (UrhG) and licensed exclusively under the terms of PolyForm Noncommercial 1.0.0.
+- Copyright & Source Code: Copyright (C) 2026 Kai Wegner. Licensed under the GNU Lesser General Public License, version 3 or later (LGPL-3.0-or-later). See [LICENSE](LICENSE).
