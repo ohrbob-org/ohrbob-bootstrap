@@ -203,7 +203,7 @@ test('card type scale and play button are comfortably sized', () => {
     const doc = window.document;
     const fontSize = (selector) => parseFloat(window.getComputedStyle(doc.querySelector(selector)).fontSize);
     assert.ok(fontSize('.card-station-title') >= 17, 'station title');
-    assert.ok(fontSize('.card-feed-title') >= 13.5, 'feed title');
+    assert.ok(fontSize('.card-feed-title') >= 15.5, 'feed title');
     assert.ok(fontSize('.card-episode-title') >= 13.5, 'episode title');
     const play = window.getComputedStyle(doc.querySelector('.card-episode-play'));
     assert.equal(play.width, '40px');
@@ -215,4 +215,22 @@ test('station cards drop the kicker and give its space to the title', () => {
     assert.ok(!css.includes('.card-station-kicker'), 'kicker rule removed');
     const html = readFileSync(path.join(root, 'index.html'), 'utf8');
     assert.ok(!html.includes('card-station-kicker'), 'showcase has no station kicker');
+});
+
+test('feed cards drop the kicker and enlarge their body text', () => {
+    const css = compileTheme();
+    assert.ok(!css.includes('.card-feed-kicker'), 'kicker rule removed');
+    const html = readFileSync(path.join(root, 'index.html'), 'utf8');
+    assert.ok(!html.includes('card-feed-kicker'), 'showcase has no feed kicker');
+
+    const window = cardWindow(`
+        <div class="card-feed"><div class="card-feed-body">
+            <h3 class="card-feed-title">Feed</h3>
+            <p class="card-feed-author">Author</p>
+            <p class="card-feed-meta">12 episodes</p>
+        </div></div>`);
+    const doc = window.document;
+    const fontSize = (selector) => parseFloat(window.getComputedStyle(doc.querySelector(selector)).fontSize);
+    assert.ok(fontSize('.card-feed-author') >= 12, 'feed author');
+    assert.ok(fontSize('.card-feed-meta') >= 11.5, 'feed meta');
 });

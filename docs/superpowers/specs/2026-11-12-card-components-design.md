@@ -53,10 +53,10 @@ feel related.
 Titles and supporting text run one step larger than the first mockup so the cards stay
 readable at arm's length and in a four-column grid:
 
-- Feed and episode kickers: 9.5px, 700, 1.4px letter-spacing, uppercase. The station card
-  has no kicker; its dark surface and broadcast badge carry the identity.
-- Station title 17px; feed and episode titles 13.5px.
-- Station meta 11.5px; feed author 11px; feed and episode meta 10.5px.
+- Episode kicker: 9.5px, 700, 1.4px letter-spacing, uppercase. The station and feed cards
+  have no kicker; their surface and badge carry the identity.
+- Station title 17px; feed title 15.5px; episode title 13.5px.
+- Station meta 11.5px; feed author 12px; feed meta 11.5px; episode meta 10.5px.
 - Station count chip 10px.
 
 ## Component Contracts
@@ -146,9 +146,6 @@ Markup:
     </button>
   </div>
   <div class="card-feed-body">
-    <div class="card-feed-kicker">
-      <i class="bi bi-rss" aria-hidden="true"></i> Feed
-    </div>
     <h3 class="card-feed-title"><a class="stretched-link" href="...">Kalk &amp; Welk</a></h3>
     <p class="card-feed-author">Die fabelhaften Boomer Boys</p>
     <p class="card-feed-meta">104 episodes · Updated 12 Nov</p>
@@ -172,6 +169,8 @@ Missing cover, rendered by the app:
   top-right of the art, white plus icon. It is a real `<button>` with its own `aria-label`,
   raised above the stretched link with `position: relative; z-index: 2`.
 - Title and author are one line with ellipsis; meta wraps to two lines maximum.
+- The feed card has no kicker. The rss badge over the cover and the violet surface carry
+  the identity, and the title starts directly under the art.
 - Hover: lift 2px, border moves to 50% light blue, shadow warms toward violet.
 - Missing cover: `.card-feed-cover-empty` is a violet-to-blue gradient block with the show's
   initial in white, keeping the cover's square aspect ratio and the same badge.
@@ -281,8 +280,8 @@ Keep these behavioural rather than pixel-perfect:
   replayed.
 - `card-feed-add` is included as part of the component because Discover already shows a
   plus button; it is optional in markup.
-- Feed and episode keep visible kickers (`Feed` / `Episode`); the station relies on its
-  dark surface and broadcast badge instead, which leaves more room for its title.
+- Only the episode keeps a visible kicker; the station and feed rely on their surface,
+  shape and badge instead, which leaves more room for their titles.
 - Accent orange for actions and badges is `$primary` / `#fc5d00`. The station edge glow uses
   `$orange-light` / `#ff9a00`.
 - Fallbacks are markup elements with dedicated classes (`.card-station-cover-empty`,
