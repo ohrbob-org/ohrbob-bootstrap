@@ -297,6 +297,19 @@ test('station editor row lays out a cover and accepts a feed accent', () => {
     assert.equal(toggle.flexShrink, '0');
 });
 
+test('station editor rows share the station card surface', () => {
+    const css = compileTheme();
+    assert.match(css, /\.card-station-feed\s*{[^}]*#12106b/s);
+    assert.match(css, /\.card-station-feed-title\s*{[^}]*color:\s*#fff/s);
+
+    const window = cardWindow(`
+        <div class="card-station-feed"><div class="card-station-feed-body">
+            <strong class="card-station-feed-title">Title</strong>
+        </div></div>`);
+    const title = window.getComputedStyle(window.document.querySelector('.card-station-feed-title'));
+    assert.equal(title.color, 'rgb(255, 255, 255)');
+});
+
 test('station editor row showcase keeps the product hooks', () => {
     const html = readFileSync(path.join(root, 'index.html'), 'utf8');
     for (const marker of [

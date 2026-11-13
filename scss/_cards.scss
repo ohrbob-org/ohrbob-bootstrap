@@ -464,7 +464,7 @@
 
 /* Station editor feed row (Stations/Edit rotation list) */
 .card-station-feed {
-  --station-feed-accent: #{$light-blue};
+  --station-feed-accent: #{$orange-light};
 
   position: relative;
   display: flex;
@@ -473,16 +473,21 @@
   min-height: 96px;
   overflow: hidden;
   padding: 0;
-  border-radius: 14px;
-  border: 1px solid color-mix(in srgb, var(--station-feed-accent) 26%, rgba($dark-blue, 0.12));
-  background: color-mix(in srgb, var(--station-feed-accent) 8%, #fff);
-  box-shadow: 0 6px 18px color-mix(in srgb, var(--station-feed-accent) 12%, transparent);
+  color: #fff;
+  border-radius: 15px;
+  border: 1px solid rgba($orange-light, 0.45);
+  background: linear-gradient(135deg, $dark-blue 0%, #12106b 58%, $light-blue 135%);
+  box-shadow:
+    0 10px 30px rgba($dark-blue, 0.26),
+    inset 0 0 22px color-mix(in srgb, var(--station-feed-accent) 24%, transparent);
   cursor: grab;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 
   &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 10px 24px color-mix(in srgb, var(--station-feed-accent) 20%, transparent);
+    transform: translateY(-2px);
+    box-shadow:
+      0 14px 34px rgba($dark-blue, 0.32),
+      0 0 18px color-mix(in srgb, var(--station-feed-accent) 34%, transparent);
   }
 
   &:active {
@@ -496,7 +501,8 @@
 
 /* Keep our border/background when the row also carries Bootstrap's list-group-item. */
 .list-group-item.card-station-feed {
-  border: 1px solid color-mix(in srgb, var(--station-feed-accent) 26%, rgba($dark-blue, 0.12));
+  border: 1px solid rgba($orange-light, 0.45);
+  background: linear-gradient(135deg, $dark-blue 0%, #12106b 58%, $light-blue 135%);
 }
 
 .card-station-feed-cover {
@@ -531,14 +537,16 @@
   height: 7px;
   border-radius: 50%;
   background: var(--station-feed-accent);
-  box-shadow: 0 0 8px color-mix(in srgb, var(--station-feed-accent) 55%, transparent);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.25),
+    0 0 8px color-mix(in srgb, var(--station-feed-accent) 55%, transparent);
 }
 
 .card-station-feed-title {
   min-width: 0;
   font-size: 15px;
   font-weight: 700;
-  color: $dark-blue;
+  color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -566,7 +574,7 @@
   gap: 5px;
   margin: 0;
   font-size: 11px;
-  color: rgba($dark-blue, 0.55);
+  color: rgba(255, 255, 255, 0.62);
   white-space: nowrap;
 
   .episodes-input {
@@ -574,6 +582,16 @@
     height: 24px;
     padding: 2px 4px;
     font-size: 12px;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.22);
+
+    &:focus {
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.18);
+      border-color: var(--station-feed-accent);
+      box-shadow: 0 0 8px color-mix(in srgb, var(--station-feed-accent) 35%, transparent);
+    }
   }
 
   .bi-question-circle {
@@ -591,14 +609,14 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  color: rgba($dark-blue, 0.5);
+  color: rgba(255, 255, 255, 0.55);
   font-size: 16px;
   text-decoration: none;
 
   &:hover,
   &:focus {
-    color: $dark-blue;
-    background: rgba($dark-blue, 0.06);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
     text-decoration: none;
   }
 }
@@ -606,7 +624,7 @@
 .card-station-feed-meta {
   font-size: 10.5px;
   line-height: 1.2;
-  color: rgba($dark-blue, 0.55);
+  color: rgba(255, 255, 255, 0.62);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -628,8 +646,8 @@
   height: 26px;
   padding: 2px;
   border-radius: 999px;
-  border: 1px solid rgba($dark-blue, 0.12);
-  background: color-mix(in srgb, var(--station-feed-accent) 7%, #fff);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
   cursor: pointer;
   user-select: none;
 }
@@ -646,9 +664,10 @@
   height: 20px;
   border-radius: 50%;
   background: var(--station-feed-accent);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   color: #fff;
   font-size: 12px;
-  box-shadow: 0 2px 6px color-mix(in srgb, var(--station-feed-accent) 45%, transparent);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--station-feed-accent) 55%, transparent);
   pointer-events: none;
   transition: left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -679,12 +698,12 @@
   padding: 0;
   border: 0;
   background: none;
-  color: rgba($dark-blue, 0.45);
+  color: rgba(255, 255, 255, 0.45);
   font-size: 11px;
   cursor: pointer;
 
   &:hover {
-    color: $dark-blue;
+    color: #fff;
   }
 }
 

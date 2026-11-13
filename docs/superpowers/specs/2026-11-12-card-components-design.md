@@ -294,16 +294,18 @@ family as the cards, but its job is editing, not browsing.
 
 - The root may also carry Bootstrap's `.list-group-item`; a dedicated rule keeps the themed
   border and background when it does.
-- `--station-feed-accent` defaults to `$light-blue`. It drives the background tint (8% mixed
-  with white), the border (26% mix), the 7px title dot and the toggle thumb.
+- The root uses the station card's surface: deep-blue gradient, orange hairline glow and
+  white text. `--station-feed-accent` defaults to `$orange-light` and drives the 7px title
+  dot, the toggle thumb and the inner accent haze.
 - Cover is 96px square; the row has a 96px minimum height and grows if controls wrap.
   Below 576px the cover drops to 76px.
 - The playback toggle is 104×26px with a 20px thumb. Thumb position comes from
   `aria-valuenow` (`1` = left, `2` = centre, `0` = right). The existing product JS sets
   inline `left`/`transform` values that agree with these rules, so it keeps working.
-- Span label is 11px; the number input is 44×24px. The menu button is a 30px ghost circle.
-- Hover lifts the row 1px with an accent-tinted shadow. `cursor: grab`, `:active` grabbing,
-  and `.dragging` at 55% opacity.
+- Span label is 11px; the number input is 44×24px on a dark glass fill. The menu button is
+  a 30px ghost circle. Both use white text at reduced opacity like the station card meta.
+- Hover lifts the row 2px with an orange and accent glow. `cursor: grab`, `:active`
+  grabbing, and `.dragging` at 55% opacity.
 - No JS is added. The row preserves the product hooks the editor script uses:
   `.rotation-item`, `.playback-order-toggle-container`, `.playback-order-toggle`,
   `.slider-thumb-container`, `.playback-order-value`, `.playback-node-btn`,
