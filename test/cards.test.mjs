@@ -109,7 +109,8 @@ test('episode card states are compiled', () => {
     ]) {
         assert.ok(css.includes(selector), selector);
     }
-    assert.match(css, /\.card-episode\s*{[^}]*border-left:\s*4px\s+solid/s);
+    assert.match(css, /\.card-episode\s*{[^}]*border:\s*1px\s+solid/s);
+    assert.match(css, /\.card-episode::before\s*{[^}]*border-radius:\s*4px/s);
 });
 
 test('episode rows are horizontal and paused progress stays visible', () => {
@@ -127,6 +128,7 @@ test('episode rows are horizontal and paused progress stays visible', () => {
     const doc = window.document;
     const plain = doc.querySelectorAll('.card-episode')[0];
     assert.equal(window.getComputedStyle(plain).display, 'flex');
+    assert.equal(window.getComputedStyle(plain).borderLeftWidth, '1px');
     assert.equal(window.getComputedStyle(plain.querySelector('.card-episode-progress')).display, 'none');
     const paused = doc.querySelectorAll('.card-episode')[1];
     assert.equal(window.getComputedStyle(paused.querySelector('.card-episode-progress')).display, 'block');

@@ -39,7 +39,7 @@ routing and click behaviour.
 | **Level** | collection | show | item |
 | **Icon** | `bi-broadcast` | `bi-rss` | `bi-mic` |
 | **Surface** | deep blue gradient (`#001957` → `#12106b` → `#544ff4`) | violet glass (`#f4f3ff`) | warm paper (`#fffaf0`) |
-| **Edge** | 1px orange glow (`#ff9a00`), inner orange haze | 1px light-blue border (`#544ff4` at 28%) | 1px yellow border (`#fdb200` at 42%), 4px orange left bar |
+| **Edge** | 1px orange glow (`#ff9a00`), inner orange haze | 1px light-blue border (`#544ff4` at 28%) | 1px yellow border (`#fdb200` at 42%), detached inset orange tab |
 | **Shape** | collage header over text | square cover over text | horizontal row: badge, text, play button |
 | **Signature detail** | 4-up cover strip + glass count chip on the art | rss badge overhanging the cover's bottom edge | circular orange play button + optional progress bar |
 
@@ -201,8 +201,12 @@ Markup:
 </div>
 ```
 
-- Default (unplayed): 34px soft-yellow circle with a warm-brown mic, orange 4px left bar,
-  orange play button, no progress bar.
+- Default (unplayed): 34px soft-yellow circle with a warm-brown mic, orange play button, no
+  progress bar, and a detached inset tab on the left.
+- The tab is a `::before` pseudo-element: a 4px orange-to-yellow pill, inset 8px from the
+  left edge and 12px from top and bottom, with fully rounded ends. It is not a border, so it
+  never curves with the card's corners, and it needs no extra markup. `padding-left` grows
+  from 12px to 20px to make room. In `.is-played` the tab turns neutral grey.
 - `.is-playing`: slightly warmer background and stronger warm shadow; the play button shows
   `bi-pause-fill` and `aria-label="Pause episode"`.
 - `.is-played`: neutral background and border, muted badge and kicker, dimmed title, and a

@@ -283,13 +283,24 @@
   gap: 11px;
   width: 100%;
   overflow: hidden;
-  padding: 11px 12px;
+  padding: 11px 12px 11px 20px;
   border-radius: 13px;
   background-color: #fffaf0;
   border: 1px solid rgba($yellow, 0.42);
-  border-left: 4px solid $strong-orange;
   box-shadow: 0 6px 18px rgba($yellow, 0.13);
   transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 12px;
+    bottom: 12px;
+    width: 4px;
+    border-radius: 4px;
+    background: linear-gradient($strong-orange, $yellow);
+    pointer-events: none;
+  }
 
   &:not(.is-played):hover {
     transform: translateY(-1px);
@@ -404,8 +415,11 @@
 .card-episode.is-played {
   background-color: #fbfbfd;
   border-color: rgba($dark-blue, 0.1);
-  border-left-color: rgba($dark-blue, 0.18);
   box-shadow: none;
+
+  &::before {
+    background: rgba($dark-blue, 0.18);
+  }
 }
 
 .card-episode.is-played .card-episode-badge {
