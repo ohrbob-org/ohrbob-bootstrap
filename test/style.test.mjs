@@ -35,3 +35,11 @@ test('glass surfaces have a frost strong enough for image backgrounds', () => {
     assert.ok(alpha(panel) >= 0.5, `panel alpha ${alpha(panel)}`);
     assert.ok(alpha(input) >= 0.5, `input alpha ${alpha(input)}`);
 });
+
+test('audio widget play button is large and the controls sit tight', () => {
+    const { window, el } = createStyledDom();
+    const play = el.querySelector('.js-play');
+    assert.equal(window.getComputedStyle(play).width, '56px');
+    assert.equal(window.getComputedStyle(play).height, '56px');
+    assert.equal(window.getComputedStyle(el.querySelector('.audio-controls')).gap, '4px');
+});

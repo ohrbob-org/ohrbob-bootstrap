@@ -85,3 +85,19 @@ test('emits jumpnext and jumpprev events when navigation jump triggers are click
     assert.equal(log[1].type, 'jumpprev');
     assert.equal(log[1].detail.episode.track, 'Prev Track');
 });
+
+test('meta area shows cover art only, without station, title or artist', () => {
+    const { el } = mount({
+        station: 'Hidden Station',
+        track: 'Hidden Track',
+        artist: 'Hidden Artist',
+        cover: 'cover.png',
+    });
+    assert.equal(el.querySelector('.audio-info'), null);
+    assert.equal(el.querySelector('.station-name'), null);
+    assert.equal(el.querySelector('.track-title'), null);
+    assert.equal(el.querySelector('.track-description'), null);
+    assert.ok(el.querySelector('.track-cover'));
+    // Expansion markup still carries the attributes; the bar itself must not.
+    assert.ok(!el.querySelector('.audio-bar').textContent.includes('Hidden'));
+});

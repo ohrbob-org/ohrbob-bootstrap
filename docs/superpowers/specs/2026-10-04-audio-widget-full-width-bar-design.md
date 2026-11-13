@@ -40,9 +40,10 @@ Private state:
 
 Because the progress range is a native control with `max` bound to `duration`, the `input` value is already a time in seconds and needs no pointer arithmetic or `setPointerCapture` handling.
 
-### Attributes (unchanged)
+### Attributes
 
-`station`, `track`, `artist`, `cover`. `track` is the title and `artist` is the description; the existing names are kept rather than renamed to `title`/`description`, so existing host markup keeps working.
+Only `cover`. The station, track title and artist are no longer displayed and their
+attributes have been removed from the component.
 
 Time formatting is a single `formatTime(seconds)` helper: `--:--` for `0`, `null`, `NaN`, or negative input; `h:mm:ss` at one hour and above; `m:ss` below that. Minutes and seconds are zero-padded to two digits.
 
@@ -53,11 +54,6 @@ Time formatting is a single `formatTime(seconds)` helper: `--:--` for `0`, `null
   <div class="audio-bar">
     <div class="audio-meta">
       <img class="track-cover" src="..." alt="">
-      <div class="audio-info">
-        <span class="station-name"><span class="station-dot"></span>My Station</span>
-        <strong class="track-title">Track Name</strong>
-        <small class="track-description">Artist</small>
-      </div>
     </div>
 
     <div class="audio-controls">
@@ -86,7 +82,7 @@ Time formatting is a single `formatTime(seconds)` helper: `--:--` for `0`, `null
 
 Control order is `back · skipback · play · skipforward · forward`: track navigation on the outside, the skip buttons flanking play, which is the podcast convention.
 
-The station line replaces the removed header row. It renders as a small primary-colored line above the title inside the info stack, so the info block is three lines: station, title, description. The settings gear moves to the far right, after the volume controls.
+The meta area holds only the cover art. The widget is a compact transport bar; station, title and artist are shown elsewhere in the host app.
 
 Both sliders are native `<input type="range">` elements. This gives pointer drag, touch, and keyboard arrow support from the browser rather than from hand-written handlers, and gives screen readers correct semantics for free.
 
@@ -132,19 +128,21 @@ Inset from all three edges rather than flush, so the bar keeps the floating glas
 
 ### Row layout
 
-`.audio-bar` is a single flex row, `align-items: center`, `gap: 16px`.
+`.audio-bar` is a single flex row, `align-items: center`, `gap: 12px`.
 
 | Group | Flex | Behaviour |
 | --- | --- | --- |
-| `.audio-meta` | `0 1 260px` | Shrinks first; `min-width: 0` so the text ellipsizes instead of forcing overflow |
-| `.audio-controls` | `0 0 auto` | Fixed-size buttons, never shrinks |
+| `.audio-meta` | `0 0 auto` | Cover art only |
+| `.audio-controls` | `0 0 auto` | Fixed-size buttons, `gap: 4px`, never shrinks |
 | `.audio-progress-group` | `1 1 auto` | Takes all remaining space; `min-width: 120px` |
 | `.audio-volume-group` | `0 0 auto` | |
 | `.btn-menu` | `0 0 auto` | |
 
 `.audio-progress-group` is itself a flex row (`gap: 10px`) with the range set to `flex: 1`.
 
-Cover art is 56px square with an 8px radius and `object-fit: cover`. `.audio-info` is a column with `overflow: hidden`; title and description are single-line with ellipsis, the station line is 0.7rem uppercase in `$primary`.
+Cover art is 56px square with an 8px radius and `object-fit: cover`. The play button is the
+largest control at 56px (52px below 768px) with a 24px icon; the skip and icon buttons stay
+32–34px.
 
 ### Range sliders
 
@@ -157,7 +155,7 @@ Both ranges are themed, not native-looking:
   - Firefox: `::-moz-range-progress` gets the fill color directly; `::-moz-range-track` stays transparent.
 - Focus ring via `:focus-visible` only, so mouse users do not see an outline.
 
-Fill colors: progress bar uses `$light-blue` (`#544ff4`), volume uses `$strong-orange` (`#fc5d00`) to match the existing play button. Note that in this theme `$primary` is aliased to `$strong-orange`, so `$light-blue` is the blue option, not `$primary`. Unfilled track is `rgba($dark-blue, 0.12)`. The station name and dot keep their existing orange, since they already use `$primary`.
+Fill colors: progress bar uses `$light-blue` (`#544ff4`), volume uses `$strong-orange` (`#fc5d00`) to match the existing play button. Note that in this theme `$primary` is aliased to `$strong-orange`, so `$light-blue` is the blue option, not `$primary`. Unfilled track is `rgba($dark-blue, 0.12)`.
 
 ### Responsive collapse
 
@@ -165,7 +163,6 @@ Single row at all widths; content sheds rather than wrapping.
 
 Below `768px`:
 
-- `.station-name` hidden.
 - `.js-back` and `.js-forward` hidden — the podcast skip buttons remain, which is the mobile control set.
 - `.audio-volume` hidden, `.js-mute` kept.
 - Cover art 40px, play button 40px, skip buttons 30px, bar `gap: 10px`, padding `10px 12px`.

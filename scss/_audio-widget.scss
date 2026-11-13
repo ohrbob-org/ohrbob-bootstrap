@@ -83,15 +83,14 @@
   .audio-bar {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
   }
 
   .audio-meta {
-    flex: 0 1 260px;
+    flex: 0 0 auto;
     min-width: 0;
     display: flex;
     align-items: center;
-    gap: 12px;
 
     .track-cover {
       width: 56px;
@@ -109,57 +108,20 @@
       font-size: 1.4rem;
       color: rgba($dark-blue, 0.4);
     }
-
-    .audio-info {
-      flex: 1 1 auto;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      line-height: 1.25;
-
-      .station-name {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 0.68rem;
-        font-weight: 700;
-        letter-spacing: 0.6px;
-        text-transform: uppercase;
-        color: $primary;
-
-        .station-dot {
-          width: 6px;
-          height: 6px;
-          flex: 0 0 6px;
-          border-radius: 50%;
-          background-color: $primary;
-          box-shadow: 0 0 5px $primary;
-        }
-      }
-
-      .track-title,
-      .track-description {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .track-title { font-size: 1rem; }
-      .track-description { font-size: 0.8rem; opacity: 0.75; }
-    }
   }
 
   .audio-controls {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    gap: 4px;
     flex: 0 0 auto;
 
     .btn-play {
-      width: 48px;
-      height: 48px;
-      min-width: 48px;
-      min-height: 48px;
+      width: 56px;
+      height: 56px;
+      min-width: 56px;
+      min-height: 56px;
       padding: 0;
       padding-left: 2px;
       display: flex;
@@ -168,7 +130,7 @@
       line-height: 0;
       border-radius: 50% !important;
       
-      svg { display: block; }
+      svg { display: block; width: 24px; height: 24px; }
     }
 
     .btn-icon {
@@ -614,7 +576,6 @@
   .audio-bar { gap: 10px; }
   
   // Hide components on mobile to keep it clean
-  .station-name { display: none; }
   .js-back, .js-forward { display: none !important; }
   .audio-volume-group, 
   .audio-progress-group, 
@@ -629,7 +590,7 @@
   }
   
   .audio-controls {
-    .btn-play { width: 44px; height: 44px; min-width: 44px; min-height: 44px; }
+    .btn-play { width: 52px; height: 52px; min-width: 52px; min-height: 52px; }
     .btn-skip { width: 34px; height: 34px; min-width: 34px; min-height: 34px; }
   }
 }
