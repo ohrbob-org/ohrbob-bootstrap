@@ -324,3 +324,19 @@ test('station editor row showcase keeps the product hooks', () => {
         assert.ok(html.includes(marker), marker);
     }
 });
+
+test('station editor rows keep one radius at list edges and carry the watermark', () => {
+    const window = cardWindow(`
+        <div class="list-group">
+            <div class="list-group-item card-station-feed"></div>
+            <div class="list-group-item card-station-feed"></div>
+        </div>`);
+    const rows = [...window.document.querySelectorAll('.card-station-feed')];
+    rows.forEach((row) => assert.equal(window.getComputedStyle(row).borderRadius, '15px'));
+
+    const css = compileTheme();
+    assert.match(css, /\.list-group-item\.card-station-feed\s*{[^}]*border-radius:\s*15px/s);
+    assert.ok(css.includes('.card-station-feed-watermark'));
+    const html = readFileSync(path.join(root, 'index.html'), 'utf8');
+    assert.ok(html.includes('card-station-feed-watermark'));
+});

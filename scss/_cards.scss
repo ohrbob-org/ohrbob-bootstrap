@@ -499,9 +499,10 @@
   }
 }
 
-/* Keep our border/background when the row also carries Bootstrap's list-group-item. */
+/* Keep our border, background and one radius when the row also carries Bootstrap's list-group-item. */
 .list-group-item.card-station-feed {
   border: 1px solid rgba($orange-light, 0.45);
+  border-radius: 15px;
   background: linear-gradient(135deg, $dark-blue 0%, #12106b 58%, $light-blue 135%);
 }
 
@@ -515,6 +516,8 @@
 }
 
 .card-station-feed-body {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -522,6 +525,17 @@
   min-width: 0;
   gap: 6px;
   padding: 10px 12px 10px 14px;
+}
+
+.card-station-feed-watermark {
+  position: absolute;
+  right: -8px;
+  bottom: -14px;
+  z-index: 0;
+  font-size: 64px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
 }
 
 .card-station-feed-title-row {

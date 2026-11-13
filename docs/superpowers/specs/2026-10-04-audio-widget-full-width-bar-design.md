@@ -42,8 +42,8 @@ Because the progress range is a native control with `max` bound to `duration`, t
 
 ### Attributes
 
-Only `cover`. The station, track title and artist are no longer displayed and their
-attributes have been removed from the component.
+The compact bar displays only `cover`. The `station`, `track` and `artist`
+attributes remain available for the expanded player view.
 
 Time formatting is a single `formatTime(seconds)` helper: `--:--` for `0`, `null`, `NaN`, or negative input; `h:mm:ss` at one hour and above; `m:ss` below that. Minutes and seconds are zero-padded to two digits.
 

@@ -248,6 +248,7 @@ family as the cards, but its job is editing, not browsing.
 ```html
 <div class="list-group-item rotation-item card-station-feed"
      draggable="true" data-url="..." style="--station-feed-accent: #E63946">
+  <i class="bi bi-soundwave card-station-feed-watermark" aria-hidden="true"></i>
   <img class="card-station-feed-cover" src="..." alt="">
   <div class="card-station-feed-body">
     <div class="card-station-feed-title-row">
@@ -297,6 +298,10 @@ family as the cards, but its job is editing, not browsing.
 - The root uses the station card's surface: deep-blue gradient, orange hairline glow and
   white text. `--station-feed-accent` defaults to `$orange-light` and drives the 7px title
   dot, the toggle thumb and the inner accent haze.
+- Every row keeps a 15px radius, including the first and last in a `.list-group`. A
+  `.list-group-item.card-station-feed` rule overrides Bootstrap's edge-only radii.
+- A faint `bi-soundwave` watermark (`.card-station-feed-watermark`) sits in the bottom-right
+  corner, matching `.card-station-watermark` on the grid card.
 - Cover is 96px square; the row has a 96px minimum height and grows if controls wrap.
   Below 576px the cover drops to 76px.
 - The playback toggle is 104×26px with a 20px thumb. Thumb position comes from
