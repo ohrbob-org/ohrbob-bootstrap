@@ -202,10 +202,17 @@ test('card type scale and play button are comfortably sized', () => {
         </div>`);
     const doc = window.document;
     const fontSize = (selector) => parseFloat(window.getComputedStyle(doc.querySelector(selector)).fontSize);
-    assert.ok(fontSize('.card-station-title') >= 15, 'station title');
+    assert.ok(fontSize('.card-station-title') >= 17, 'station title');
     assert.ok(fontSize('.card-feed-title') >= 13.5, 'feed title');
     assert.ok(fontSize('.card-episode-title') >= 13.5, 'episode title');
     const play = window.getComputedStyle(doc.querySelector('.card-episode-play'));
     assert.equal(play.width, '40px');
     assert.equal(play.height, '40px');
+});
+
+test('station cards drop the kicker and give its space to the title', () => {
+    const css = compileTheme();
+    assert.ok(!css.includes('.card-station-kicker'), 'kicker rule removed');
+    const html = readFileSync(path.join(root, 'index.html'), 'utf8');
+    assert.ok(!html.includes('card-station-kicker'), 'showcase has no station kicker');
 });

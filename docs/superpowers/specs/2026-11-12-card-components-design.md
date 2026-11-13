@@ -53,8 +53,9 @@ feel related.
 Titles and supporting text run one step larger than the first mockup so the cards stay
 readable at arm's length and in a four-column grid:
 
-- Kickers: 9.5px, 700, 1.4px letter-spacing, uppercase.
-- Station title 15px; feed and episode titles 13.5px.
+- Feed and episode kickers: 9.5px, 700, 1.4px letter-spacing, uppercase. The station card
+  has no kicker; its dark surface and broadcast badge carry the identity.
+- Station title 17px; feed and episode titles 13.5px.
 - Station meta 11.5px; feed author 11px; feed and episode meta 10.5px.
 - Station count chip 10px.
 
@@ -88,9 +89,6 @@ Markup:
   </div>
   <div class="card-station-body">
     <i class="bi bi-soundwave card-station-watermark" aria-hidden="true"></i>
-    <div class="card-station-kicker">
-      <i class="bi bi-broadcast" aria-hidden="true"></i> Station
-    </div>
     <h3 class="card-station-title"><a class="stretched-link" href="...">Laberpodcasts</a></h3>
     <p class="card-station-meta"><strong>411</strong> episodes · Kai</p>
   </div>
@@ -119,8 +117,9 @@ Behaviour of the parts:
 - `.card-station-badge`: 26px orange circle, 1px translucent white ring, orange glow.
 - `.card-station-count`: glass chip (dark translucent, blurred) at top-right, e.g.
   `4 podcasts`. Singular form is the app's job.
-- `.card-station-title`: one line, ellipsis. Contains the stretched link when the card is
-  navigable.
+- `.card-station-title`: one line, ellipsis, 17px. It sits directly under the art; the
+  station card has no kicker row, so the title gets that vertical space. Contains the
+  stretched link when the card is navigable.
 - `.card-station-meta`: owner and episode count, low-contrast white.
 - `.card-station-watermark`: decorative `bi-soundwave` icon in the body's bottom-right
   corner at low opacity. It is a real element rather than a pseudo-element so the SCSS has
@@ -282,8 +281,8 @@ Keep these behavioural rather than pixel-perfect:
   replayed.
 - `card-feed-add` is included as part of the component because Discover already shows a
   plus button; it is optional in markup.
-- The kicker (`Station` / `Feed` / `Episode`) is visible text, not only an icon. It is the
-  fallback when colour is unavailable.
+- Feed and episode keep visible kickers (`Feed` / `Episode`); the station relies on its
+  dark surface and broadcast badge instead, which leaves more room for its title.
 - Accent orange for actions and badges is `$primary` / `#fc5d00`. The station edge glow uses
   `$orange-light` / `#ff9a00`.
 - Fallbacks are markup elements with dedicated classes (`.card-station-cover-empty`,
