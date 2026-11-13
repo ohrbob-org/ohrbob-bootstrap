@@ -48,6 +48,16 @@ orange for station, light blue for feed, soft yellow for episode. The same badge
 (top-left of the collage, bottom-left of the cover, left of the row) is what makes the set
 feel related.
 
+### Type scale
+
+Titles and supporting text run one step larger than the first mockup so the cards stay
+readable at arm's length and in a four-column grid:
+
+- Kickers: 9.5px, 700, 1.4px letter-spacing, uppercase.
+- Station title 15px; feed and episode titles 13.5px.
+- Station meta 11.5px; feed author 11px; feed and episode meta 10.5px.
+- Station count chip 10px.
+
 ## Component Contracts
 
 All components are self-contained containers. The root is always a non-interactive
@@ -198,7 +208,8 @@ Markup:
 - `.is-playing`: slightly warmer background and stronger warm shadow; the play button shows
   `bi-pause-fill` and `aria-label="Pause episode"`.
 - `.is-played`: neutral background and border, muted badge and kicker, dimmed title, and a
-  32px neutral circle showing `bi-check-lg` with `aria-label="Play again"`. No progress bar.
+  36px neutral circle showing `bi-check-lg` with `aria-label="Play again"`. No progress bar.
+- The play button is a 40px orange circle in the default and playing states.
 - Progress is independent of playback state: `.card-episode-progress` is visible whenever
   the row has `.has-progress`, and hidden otherwise. That way a paused episode keeps its
   progress bar. `.is-playing` uses `.has-progress` too, but the bar is not removed by
@@ -211,8 +222,8 @@ Markup:
   z-index: 2`.
 - The cover image is deliberately absent. The mic badge replaces it, which is what keeps
   the row visually distinct from a feed.
-- Below 576px the kicker is hidden and the play button shrinks to 32px; the row keeps its
-  horizontal layout.
+- Below 576px the kicker is hidden; the row keeps its horizontal layout and the play button
+  keeps its 40px size.
 
 ## Responsive Behaviour
 

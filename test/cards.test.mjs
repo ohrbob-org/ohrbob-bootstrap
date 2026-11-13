@@ -185,3 +185,27 @@ test('stretched links resolve against the card and overlays pass clicks through'
         assert.equal(window.getComputedStyle(doc.querySelector(selector)).pointerEvents, 'none', selector);
     }
 });
+
+test('card type scale and play button are comfortably sized', () => {
+    const window = cardWindow(`
+        <div class="card-station"><div class="card-station-body">
+            <h3 class="card-station-title">Station</h3>
+        </div></div>
+        <div class="card-feed"><div class="card-feed-body">
+            <h3 class="card-feed-title">Feed</h3>
+        </div></div>
+        <div class="card-episode">
+            <div class="card-episode-body">
+                <h3 class="card-episode-title">Episode</h3>
+            </div>
+            <button class="card-episode-play">P</button>
+        </div>`);
+    const doc = window.document;
+    const fontSize = (selector) => parseFloat(window.getComputedStyle(doc.querySelector(selector)).fontSize);
+    assert.ok(fontSize('.card-station-title') >= 15, 'station title');
+    assert.ok(fontSize('.card-feed-title') >= 13.5, 'feed title');
+    assert.ok(fontSize('.card-episode-title') >= 13.5, 'episode title');
+    const play = window.getComputedStyle(doc.querySelector('.card-episode-play'));
+    assert.equal(play.width, '40px');
+    assert.equal(play.height, '40px');
+});
