@@ -457,6 +457,7 @@
 &lt;/div&gt;</code></pre>
 
             <h5 class="mt-4">Episode</h5>
+            <p class="small text-muted">The tab colour comes from <code>--card-episode-accent</code>. Set it inline or from a feed colour; the second gradient stop is derived automatically. The last row shows a custom accent.</p>
             <div class="d-flex flex-column gap-2 mb-3">
                 <div class="card-episode">
                     <span class="card-episode-badge" aria-hidden="true"><i class="bi bi-mic"></i></span>
@@ -485,6 +486,15 @@
                         <p class="card-episode-meta">Kalk &amp; Welk · 29 Oct · 61 min</p>
                     </div>
                     <button class="card-episode-play" type="button" aria-label="Play again"><i class="bi bi-check-lg" aria-hidden="true"></i></button>
+                </div>
+                <div class="card-episode" style="--card-episode-accent: #544ff4;">
+                    <span class="card-episode-badge" aria-hidden="true"><i class="bi bi-mic"></i></span>
+                    <div class="card-episode-body">
+                        <div class="card-episode-kicker"><i class="bi bi-mic" aria-hidden="true"></i> Episode · custom accent</div>
+                        <h3 class="card-episode-title"><a class="stretched-link" href="#">Folge 101: Ein anderer Feed, eine andere Farbe</a></h3>
+                        <p class="card-episode-meta">Talk ohne Gast · 29 Oct · 47 min</p>
+                    </div>
+                    <button class="card-episode-play" type="button" aria-label="Play episode"><i class="bi bi-play-fill" aria-hidden="true"></i></button>
                 </div>
             </div>
 <pre class="mb-4" style="overflow-x: auto;"><code class="language-html">&lt;div class="card-episode is-playing has-progress"&gt;

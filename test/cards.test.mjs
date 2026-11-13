@@ -212,6 +212,26 @@ test('card type scale and play button are comfortably sized', () => {
     assert.equal(play.height, '40px');
 });
 
+test('episode tab colour is driven by a CSS custom property', () => {
+    const window = cardWindow(`
+        <div class="card-episode"><button class="card-episode-play">P</button></div>
+        <div class="card-episode" style="--card-episode-accent: #E63946">
+            <button class="card-episode-play">P</button>
+        </div>`);
+    const doc = window.document;
+    const cards = [...doc.querySelectorAll('.card-episode')];
+    assert.equal(
+        window.getComputedStyle(cards[0]).getPropertyValue('--card-episode-accent').trim(),
+        '#fc5d00'
+    );
+    assert.equal(
+        window.getComputedStyle(cards[1]).getPropertyValue('--card-episode-accent').trim(),
+        '#E63946'
+    );
+    const css = compileTheme();
+    assert.match(css, /\.card-episode::before\s*{[^}]*var\(--card-episode-accent\)/s);
+});
+
 test('station cards drop the kicker and give its space to the title', () => {
     const css = compileTheme();
     assert.ok(!css.includes('.card-station-kicker'), 'kicker rule removed');

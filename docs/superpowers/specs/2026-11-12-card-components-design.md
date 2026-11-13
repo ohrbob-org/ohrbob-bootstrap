@@ -207,6 +207,17 @@ Markup:
   left edge and 12px from top and bottom, with fully rounded ends. It is not a border, so it
   never curves with the card's corners, and it needs no extra markup. `padding-left` grows
   from 12px to 20px to make room. In `.is-played` the tab turns neutral grey.
+- The tab colour is a custom property. `--card-episode-accent` defaults to `#fc5d00`;
+  `--card-episode-accent-end` is derived from it with
+  `color-mix(in srgb, var(--card-episode-accent) 45%, #fdb200)`. A single inline override is
+  enough to match a feed colour:
+
+  ```html
+  <div class="card-episode" style="--card-episode-accent: #544ff4">
+  ```
+
+  Set `--card-episode-accent-end` too when a specific second stop is wanted. `.is-played`
+  resets both properties to the grey used by the played state.
 - `.is-playing`: slightly warmer background and stronger warm shadow; the play button shows
   `bi-pause-fill` and `aria-label="Pause episode"`.
 - `.is-played`: neutral background and border, muted badge and kicker, dimmed title, and a

@@ -277,6 +277,9 @@
 }
 
 .card-episode {
+  --card-episode-accent: #{$strong-orange};
+  --card-episode-accent-end: color-mix(in srgb, var(--card-episode-accent) 45%, #{$yellow});
+
   position: relative;
   display: flex;
   align-items: center;
@@ -298,7 +301,7 @@
     bottom: 12px;
     width: 4px;
     border-radius: 4px;
-    background: linear-gradient($strong-orange, $yellow);
+    background: linear-gradient(var(--card-episode-accent), var(--card-episode-accent-end));
     pointer-events: none;
   }
 
@@ -413,13 +416,12 @@
 }
 
 .card-episode.is-played {
+  --card-episode-accent: rgba($dark-blue, 0.18);
+  --card-episode-accent-end: rgba($dark-blue, 0.18);
+
   background-color: #fbfbfd;
   border-color: rgba($dark-blue, 0.1);
   box-shadow: none;
-
-  &::before {
-    background: rgba($dark-blue, 0.18);
-  }
 }
 
 .card-episode.is-played .card-episode-badge {
