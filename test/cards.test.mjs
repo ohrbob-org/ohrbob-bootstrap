@@ -256,3 +256,58 @@ test('feed cards drop the kicker and enlarge their body text', () => {
     assert.ok(fontSize('.card-feed-author') >= 12, 'feed author');
     assert.ok(fontSize('.card-feed-meta') >= 11.5, 'feed meta');
 });
+
+test('station editor row styles and hooks are compiled', () => {
+    const css = compileTheme();
+    for (const selector of [
+        '.card-station-feed',
+        '.card-station-feed-cover',
+        '.card-station-feed-body',
+        '.card-station-feed-title',
+        '.card-station-feed-meta',
+        '.playback-order-toggle',
+        '.slider-thumb-container',
+        '.card-station-feed-span',
+        '.card-station-feed-menu',
+    ]) {
+        assert.ok(css.includes(selector), selector);
+    }
+    assert.match(css, /\[aria-valuenow="2"\]\s+\.slider-thumb-container/s);
+    assert.match(css, /var\(--station-feed-accent\)/);
+});
+
+test('station editor row lays out a cover and accepts a feed accent', () => {
+    const window = cardWindow(`
+        <div class="card-station-feed rotation-item" style="--station-feed-accent: #E63946">
+            <img class="card-station-feed-cover" alt="">
+            <div class="card-station-feed-body">
+                <div class="playback-order-toggle-container"></div>
+            </div>
+        </div>`);
+    const doc = window.document;
+    const card = doc.querySelector('.card-station-feed');
+    assert.equal(window.getComputedStyle(card).display, 'flex');
+    assert.equal(window.getComputedStyle(card).getPropertyValue('--station-feed-accent').trim(), '#E63946');
+    const cover = window.getComputedStyle(doc.querySelector('.card-station-feed-cover'));
+    assert.equal(cover.width, '96px');
+    assert.equal(cover.height, '96px');
+    assert.equal(cover.objectFit, 'cover');
+    const toggle = window.getComputedStyle(doc.querySelector('.playback-order-toggle-container'));
+    assert.equal(toggle.width, '104px');
+    assert.equal(toggle.flexShrink, '0');
+});
+
+test('station editor row showcase keeps the product hooks', () => {
+    const html = readFileSync(path.join(root, 'index.html'), 'utf8');
+    for (const marker of [
+        'card-station-feed',
+        'rotation-item',
+        'playback-order-toggle',
+        'playback-order-value',
+        'episodes-input',
+        'move-feed',
+        'remove-feed',
+    ]) {
+        assert.ok(html.includes(marker), marker);
+    }
+});

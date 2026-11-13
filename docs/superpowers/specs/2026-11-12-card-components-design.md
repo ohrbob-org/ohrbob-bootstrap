@@ -22,6 +22,8 @@ routing and click behaviour.
 - The station card works in a 2/3/4-column grid (the primary usage, e.g. "My Stations").
 - The feed card works in the Discover grid and in the share view's podcast grid.
 - The episode card works as a list row, with unplayed, playing and played states.
+- A detailed station-editor feed row keeps the editor's playback-order toggle, span input and
+  actions menu, restyled to the theme.
 - Consistent with the existing "Frosted Neon" tokens and typography.
 - No npm dependencies. Icons come from Bootstrap Icons, which the app already loads.
 
@@ -238,8 +240,76 @@ Markup:
 - Below 576px the kicker is hidden; the row keeps its horizontal layout and the play button
   keeps its 40px size.
 
-## Responsive Behaviour
+### 4. Station editor feed row
 
+The station editor's rotation list uses a denser, control-heavy row. It is the same visual
+family as the cards, but its job is editing, not browsing.
+
+```html
+<div class="list-group-item rotation-item card-station-feed"
+     draggable="true" data-url="..." style="--station-feed-accent: #E63946">
+  <img class="card-station-feed-cover" src="..." alt="">
+  <div class="card-station-feed-body">
+    <div class="card-station-feed-title-row">
+      <span class="card-station-feed-dot" aria-hidden="true"></span>
+      <strong class="card-station-feed-title" title="...">Kalk &amp; Welk</strong>
+    </div>
+    <div class="card-station-feed-controls">
+      <div class="card-station-feed-controls-left">
+        <div class="playback-order-toggle-container">
+          <div class="playback-order-toggle" role="slider" aria-label="Playback order"
+               aria-valuemin="0" aria-valuemax="2" aria-valuenow="1" id="sliderTrack-0">
+            <span class="slider-thumb-container" aria-hidden="true">
+              <i class="bi bi-sort-down"></i>
+            </span>
+            <button type="button" class="playback-node-btn" aria-label="Backwards">…</button>
+            <button type="button" class="playback-node-btn" aria-label="Random">…</button>
+            <button type="button" class="playback-node-btn" aria-label="Forwards">…</button>
+          </div>
+          <input type="hidden" class="playback-order-value" value="1">
+        </div>
+
+        <label class="card-station-feed-span">
+          <span>Span <i class="bi bi-question-circle" title="…"></i>:</span>
+          <input type="number" class="form-control form-control-sm episodes-input"
+                 min="1" max="99" value="1">
+        </label>
+      </div>
+
+      <div class="dropdown">
+        <button type="button" class="btn btn-link card-station-feed-menu"
+                data-bs-toggle="dropdown" aria-label="Feed options">…</button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><button class="dropdown-item move-feed" type="button">Move to another station</button></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><button class="dropdown-item text-danger remove-feed" type="button">Delete feed</button></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card-station-feed-meta">104 episodes · Updated 12 Nov 2026, 20:36</div>
+  </div>
+</div>
+```
+
+- The root may also carry Bootstrap's `.list-group-item`; a dedicated rule keeps the themed
+  border and background when it does.
+- `--station-feed-accent` defaults to `$light-blue`. It drives the background tint (8% mixed
+  with white), the border (26% mix), the 7px title dot and the toggle thumb.
+- Cover is 96px square; the row has a 96px minimum height and grows if controls wrap.
+  Below 576px the cover drops to 76px.
+- The playback toggle is 104×26px with a 20px thumb. Thumb position comes from
+  `aria-valuenow` (`1` = left, `2` = centre, `0` = right). The existing product JS sets
+  inline `left`/`transform` values that agree with these rules, so it keeps working.
+- Span label is 11px; the number input is 44×24px. The menu button is a 30px ghost circle.
+- Hover lifts the row 1px with an accent-tinted shadow. `cursor: grab`, `:active` grabbing,
+  and `.dragging` at 55% opacity.
+- No JS is added. The row preserves the product hooks the editor script uses:
+  `.rotation-item`, `.playback-order-toggle-container`, `.playback-order-toggle`,
+  `.slider-thumb-container`, `.playback-order-value`, `.playback-node-btn`,
+  `.episodes-input`, `.move-feed`, `.remove-feed`, and `#sliderTrack-N`.
+
+## Responsive Behaviour
 - Gaps and grid columns come from Bootstrap (`row-cols-*`). The cards themselves are fluid
   and have no fixed widths.
 - Station art is always 72px tall; the body adapts.
@@ -254,8 +324,9 @@ Markup:
 - `index.html` — add a Bootstrap Icons CDN `<link>` (the same one `Ohrbob.Web` loads) so
   badges, kickers and watermarks render in the showcase. Then add a "Card Components"
   section (before the existing generic Components block) showing: a four-card station grid
-  (including the empty state), a three-card feed row (including a missing cover), and an
-  episode list with unplayed, playing and played examples, each with a markup snippet.
+  (including the empty state), a three-card feed row (including a missing cover), an
+  episode list with unplayed, playing and played examples, and two station editor rows with
+  different feed accents, each with a markup snippet.
   The icon font remains an external app asset; nothing is bundled or copied by
   `apply-theme.sh`.
 - `test/cards.test.mjs` — tests, following the existing node:test + jsdom helpers.
@@ -264,8 +335,8 @@ Markup:
 
 Keep these behavioural rather than pixel-perfect:
 
-1. Compiled CSS contains `.card-station`, `.card-feed`, `.card-episode`, the fallback
-   classes, `.has-progress`, and the two episode state selectors.
+1. Compiled CSS contains `.card-station`, `.card-feed`, `.card-episode`, `.card-station-feed`,
+   the fallback classes, `.has-progress`, and the two episode state selectors.
 2. In jsdom with the compiled theme applied:
    - station art lays its covers out in a row (`display: flex`);
    - station badge is circular (`border-radius: 50%`) and orange;
@@ -274,9 +345,9 @@ Keep these behavioural rather than pixel-perfect:
    - `.is-played` lowers the title opacity relative to the default;
    - `.has-progress .card-episode-progress` is visible while a row without `.has-progress`
      hides it.
-3. The showcase markup in `index.html` contains all three card classes, both episode state
-   modifiers, `.has-progress`, and the icon CDN link, so the docs cannot silently drift from
-   the components.
+3. The showcase markup in `index.html` contains all three card classes, the station editor
+   row and its product hooks, both episode state modifiers, `.has-progress`, and the icon CDN
+   link, so the docs cannot silently drift from the components.
 
 ## Decisions Made Here (check these while reading)
 

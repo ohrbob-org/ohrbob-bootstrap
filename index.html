@@ -507,6 +507,81 @@
   &lt;/div&gt;
   &lt;button class="card-episode-play" type="button" aria-label="Pause episode"&gt;&lt;i class="bi bi-pause-fill"&gt;&lt;/i&gt;&lt;/button&gt;
 &lt;/div&gt;</code></pre>
+
+            <h5 class="mt-4">Station editor row</h5>
+            <p class="small text-muted">The detailed feed row used in the station editor. Set <code>--station-feed-accent</code> to the feed colour; the tint, dot and playback thumb follow it. The playback toggle, span input and menu keep the product's hook classes.</p>
+            <div class="list-group mb-3">
+                <div class="list-group-item rotation-item card-station-feed mb-3" draggable="true" data-url="https://www.radioeins.de/archiv/podcast/kalk_welk.xml/feed=podcast.xml" style="--station-feed-accent: #E63946;">
+                    <img class="card-station-feed-cover" src="https://www.rbb-online.de/content/dam/rbb/rad/image_bilder/podcast/kalk_welk_11.png.png/rendition=ARD.png.png" alt="">
+                    <div class="card-station-feed-body">
+                        <div class="card-station-feed-title-row">
+                            <span class="card-station-feed-dot" aria-hidden="true"></span>
+                            <strong class="card-station-feed-title" title="Kalk &amp; Welk - Die fabelhaften Boomer Boys">Kalk &amp; Welk - Die fabelhaften Boomer Boys</strong>
+                        </div>
+                        <div class="card-station-feed-controls">
+                            <div class="card-station-feed-controls-left">
+                                <div class="playback-order-toggle-container">
+                                    <div class="playback-order-toggle" role="slider" aria-label="Playback order" aria-valuemin="0" aria-valuemax="2" aria-valuenow="1" id="sliderTrack-0">
+                                        <span class="slider-thumb-container" aria-hidden="true"><i class="bi bi-sort-down"></i></span>
+                                        <button type="button" class="playback-node-btn" aria-label="Backwards: Newest to Oldest"><i class="bi bi-sort-down"></i></button>
+                                        <button type="button" class="playback-node-btn" aria-label="Random"><i class="bi bi-shuffle"></i></button>
+                                        <button type="button" class="playback-node-btn" aria-label="Forwards: Oldest to Newest"><i class="bi bi-sort-up"></i></button>
+                                    </div>
+                                    <input type="hidden" class="playback-order-value" value="1">
+                                </div>
+                                <label class="card-station-feed-span">
+                                    <span>Span <i class="bi bi-question-circle" title="How many unplayed episodes this feed contributes on its turn before rotating to the next."></i>:</span>
+                                    <input type="number" class="form-control form-control-sm episodes-input" min="1" max="99" value="1">
+                                </label>
+                            </div>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-link card-station-feed-menu" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Feed options"><i class="bi bi-three-dots-vertical"></i></button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><button type="button" class="dropdown-item move-feed"><i class="bi bi-arrow-left-right me-2"></i>Move to another station</button></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><button type="button" class="dropdown-item text-danger remove-feed"><i class="bi bi-trash3-fill me-2"></i>Delete feed</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-station-feed-meta">104 episodes · Updated 12 Nov 2026, 20:36</div>
+                    </div>
+                </div>
+                <div class="list-group-item rotation-item card-station-feed" draggable="true" data-url="https://example.com/talk-ohne-gast.xml" style="--station-feed-accent: #1D3557;">
+                    <img class="card-station-feed-cover" src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&q=80&w=300&h=300" alt="">
+                    <div class="card-station-feed-body">
+                        <div class="card-station-feed-title-row">
+                            <span class="card-station-feed-dot" aria-hidden="true"></span>
+                            <strong class="card-station-feed-title" title="Talk ohne Gast">Talk ohne Gast</strong>
+                        </div>
+                        <div class="card-station-feed-controls">
+                            <div class="card-station-feed-controls-left">
+                                <div class="playback-order-toggle-container">
+                                    <div class="playback-order-toggle" role="slider" aria-label="Playback order" aria-valuemin="0" aria-valuemax="2" aria-valuenow="2" id="sliderTrack-1">
+                                        <span class="slider-thumb-container" aria-hidden="true"><i class="bi bi-shuffle"></i></span>
+                                        <button type="button" class="playback-node-btn" aria-label="Backwards: Newest to Oldest"><i class="bi bi-sort-down"></i></button>
+                                        <button type="button" class="playback-node-btn" aria-label="Random"><i class="bi bi-shuffle"></i></button>
+                                        <button type="button" class="playback-node-btn" aria-label="Forwards: Oldest to Newest"><i class="bi bi-sort-up"></i></button>
+                                    </div>
+                                    <input type="hidden" class="playback-order-value" value="2">
+                                </div>
+                                <label class="card-station-feed-span">
+                                    <span>Span <i class="bi bi-question-circle" title="How many unplayed episodes this feed contributes on its turn before rotating to the next."></i>:</span>
+                                    <input type="number" class="form-control form-control-sm episodes-input" min="1" max="99" value="3">
+                                </label>
+                            </div>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-link card-station-feed-menu" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Feed options"><i class="bi bi-three-dots-vertical"></i></button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><button type="button" class="dropdown-item move-feed"><i class="bi bi-arrow-left-right me-2"></i>Move to another station</button></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><button type="button" class="dropdown-item text-danger remove-feed"><i class="bi bi-trash3-fill me-2"></i>Delete feed</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-station-feed-meta">307 episodes · Updated 11 Nov 2026, 18:02</div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <h2 class="mb-4">Components</h2>
