@@ -161,3 +161,27 @@ test('showcase documents all card components', () => {
         assert.ok(html.includes(marker), marker);
     }
 });
+
+test('stretched links resolve against the card and overlays pass clicks through', () => {
+    const window = cardWindow(`
+        <div class="card-station">
+            <span class="card-station-badge">B</span>
+            <span class="card-station-count">2 podcasts</span>
+            <div class="card-station-body">
+                <h3 class="card-station-title"><a class="stretched-link" href="#">Station</a></h3>
+            </div>
+        </div>
+        <div class="card-feed">
+            <span class="card-feed-badge">R</span>
+            <div class="card-feed-body">
+                <h3 class="card-feed-title"><a class="stretched-link" href="#">Feed</a></h3>
+            </div>
+        </div>`);
+    const doc = window.document;
+    for (const selector of ['.card-station-body', '.card-feed-body']) {
+        assert.equal(window.getComputedStyle(doc.querySelector(selector)).position, 'static', selector);
+    }
+    for (const selector of ['.card-station-badge', '.card-station-count', '.card-feed-badge']) {
+        assert.equal(window.getComputedStyle(doc.querySelector(selector)).pointerEvents, 'none', selector);
+    }
+});

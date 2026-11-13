@@ -83,6 +83,7 @@
   color: #fff;
   font-size: 12px;
   box-shadow: 0 0 16px rgba($strong-orange, 0.6);
+  pointer-events: none;
 }
 
 .card-station-count {
@@ -99,10 +100,10 @@
   background: rgba($dark-blue, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(6px);
+  pointer-events: none;
 }
 
 .card-station-body {
-  position: relative;
   padding: 9px 12px 12px;
 }
 
@@ -219,6 +220,7 @@
   color: #fff;
   font-size: 13px;
   box-shadow: 0 3px 10px rgba($dark-blue, 0.28);
+  pointer-events: none;
 }
 
 .card-feed-add {
@@ -248,7 +250,6 @@
 }
 
 .card-feed-body {
-  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
