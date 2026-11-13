@@ -520,6 +520,27 @@
 
         <input type="text" class="form-control glass-input mb-4" placeholder="Glass Input">
 
+        <h4 class="mb-3 mt-4">Glass on a Background Image</h4>
+        <p>The same glass card and glass input over a photo. Everything else is unchanged; the frost comes from the panel's tint and backdrop blur.</p>
+        <div class="rounded-4 overflow-hidden mb-5" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1600'); background-size: cover; background-position: center;">
+            <div class="p-4 p-md-5">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-7">
+                        <div class="card glass-panel">
+                            <div class="card-body">
+                                <h5 class="card-title">Glass Card</h5>
+                                <p class="card-text">This is the same glass card, now over artwork.</p>
+                                <button class="btn btn-primary btn-glow">Primary Button</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <input type="text" class="form-control glass-input" placeholder="Search stations">
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h4 class="mb-3 mt-4">Audio Widget</h4>
         <p>The <code>&lt;audio-widget&gt;</code> is a custom web component styled as a glass panel with a frosted glass edge. It's a full-width player bar docked to the bottom of the viewport. Here is the code structure used for it:</p>
         <div class="card glass-panel mb-5">

@@ -18,3 +18,20 @@ test('media queries exist in compiled CSS', () => {
     assert.ok(css.includes('@media (max-width: 767.98px)'));
     assert.ok(css.includes('@media (max-width: 419.98px)'));
 });
+
+test('glass surfaces have a frost strong enough for image backgrounds', () => {
+    const { window, document } = createStyledDom();
+    const alpha = (element) => {
+        const parts = window.getComputedStyle(element).backgroundColor.match(/[\d.]+/g) || [];
+        return parts.length === 4 ? parseFloat(parts[3]) : 1;
+    };
+    const panel = document.createElement('div');
+    panel.className = 'glass-panel';
+    document.body.appendChild(panel);
+    const input = document.createElement('input');
+    input.className = 'glass-input';
+    document.body.appendChild(input);
+
+    assert.ok(alpha(panel) >= 0.5, `panel alpha ${alpha(panel)}`);
+    assert.ok(alpha(input) >= 0.5, `input alpha ${alpha(input)}`);
+});
