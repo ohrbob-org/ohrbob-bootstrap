@@ -556,7 +556,7 @@
             const buttons = [...track.querySelectorAll('.playback-node-btn')];
 
             function setValue(value) {
-                const left = value === 1 ? '3px' : (value === 2 ? '50%' : 'calc(100% - 3px)');
+                const left = value === 1 ? '2px' : (value === 2 ? '50%' : 'calc(100% - 2px)');
                 const transform = value === 1 ? 'translateX(0)' : (value === 2 ? 'translateX(-50%)' : 'translateX(-100%)');
                 thumb.style.left = left;
                 thumb.style.transform = transform;

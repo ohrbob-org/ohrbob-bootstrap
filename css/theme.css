@@ -13703,7 +13703,7 @@ a:hover {
 .slider-thumb-container {
   position: absolute;
   top: 2px;
-  left: 3px;
+  left: 2px;
   z-index: 20;
   display: grid;
   place-items: center;
@@ -13720,7 +13720,7 @@ a:hover {
 }
 
 .playback-order-toggle[aria-valuenow="1"] .slider-thumb-container {
-  left: 3px;
+  left: 2px;
   transform: translateX(0);
 }
 
@@ -13730,7 +13730,7 @@ a:hover {
 }
 
 .playback-order-toggle[aria-valuenow="0"] .slider-thumb-container {
-  left: calc(100% - 3px);
+  left: calc(100% - 2px);
   transform: translateX(-100%);
 }
 
