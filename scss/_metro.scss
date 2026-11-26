@@ -75,6 +75,15 @@
   --metro-body: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
   --metro-transition: 160ms ease;
 
+  --metro-night-surface: #080d18cc;
+  --metro-night-border: #ffffff26;
+  --metro-night-field: #ffffff14;
+  --metro-night-field-rule: #ffffff40;
+  --metro-night-text: #ffffff;
+  --metro-night-muted: #ffffff99;
+  --metro-night-faint: #ffffff66;
+  --metro-night-accent: #ff9a00;
+
   color-scheme: light;
 }
 
@@ -86,6 +95,12 @@
   :root:not([data-bs-theme="light"]) {
     @include metro-dark-tokens;
   }
+}
+
+.metro-night {
+  @include metro-dark-tokens;
+  --metro-night-accent: #ff9a00;
+  color-scheme: dark;
 }
 
 html,

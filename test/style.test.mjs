@@ -65,3 +65,26 @@ test('Metro typography and theme tokens are compiled', () => {
     assert.match(css, /--metro-canvas:\s*#f4f1ea/i);
     assert.match(css, /--metro-ink:\s*#111217/i);
 });
+
+test('Inter is bundled for the body text', () => {
+    const css = compileTheme();
+    for (const weight of [400, 500, 600, 700]) {
+        assert.match(css, new RegExp(
+            `@font-face[^}]*font-family:\\s*['"]Inter['"][^}]*font-weight:\\s*${weight}`, 's'));
+        assert.ok(css.includes(`inter-${weight}.woff2`));
+    }
+});
+
+test('night scope exposes the translated dark tokens', () => {
+    const css = compileTheme();
+    for (const token of [
+        '--metro-night-surface', '--metro-night-border', '--metro-night-field',
+        '--metro-night-field-rule', '--metro-night-text', '--metro-night-muted',
+        '--metro-night-faint', '--metro-night-accent',
+    ]) {
+        assert.ok(css.includes(token), token);
+    }
+    assert.match(css, /\.metro-night\s*{[^}]*--metro-canvas:\s*#0e0f13/s);
+    assert.match(css, /\.metro-night\s*{[^}]*color-scheme:\s*dark/s);
+    assert.ok(!css.includes('#cc080d18'), 'ARGB values must never be copied into CSS');
+});

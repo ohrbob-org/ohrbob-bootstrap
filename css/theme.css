@@ -1,5 +1,33 @@
 @charset "UTF-8";
 @font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../css/fonts/inter-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../css/fonts/inter-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../css/fonts/inter-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../css/fonts/inter-700.woff2") format("woff2");
+}
+@font-face {
   font-family: "Sulphur Point";
   font-style: normal;
   font-weight: 400;
@@ -11899,6 +11927,14 @@ textarea.form-control-lg {
   --metro-display: "Sulphur Point", sans-serif;
   --metro-body: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
   --metro-transition: 160ms ease;
+  --metro-night-surface: #080d18cc;
+  --metro-night-border: #ffffff26;
+  --metro-night-field: #ffffff14;
+  --metro-night-field-rule: #ffffff40;
+  --metro-night-text: #ffffff;
+  --metro-night-muted: #ffffff99;
+  --metro-night-faint: #ffffff66;
+  --metro-night-accent: #ff9a00;
   color-scheme: light;
 }
 
@@ -11961,6 +11997,37 @@ textarea.form-control-lg {
     color-scheme: dark;
   }
 }
+.metro-night {
+  --metro-canvas: #0e0f13;
+  --metro-ink: #f7f4ed;
+  --metro-muted: #a7a29a;
+  --metro-hairline: #30323a;
+  --metro-tile: #191b21;
+  --metro-tile-alt: #001957;
+  --metro-chrome: #0e0f13;
+  --metro-field: #17191f;
+  --metro-scrim: #000000d9;
+  --metro-overlay: #000000f2;
+  --metro-station-base: #001957;
+  --metro-station-title: #ffffff;
+  --metro-station-fade: linear-gradient(180deg, #000a1433 0%, #000a1499 55%, #000a14e6 100%);
+  --metro-player-chrome: #0a0e18;
+  --metro-player-border: #ffffff26;
+  --metro-now-base: #001957;
+  --metro-now-text: #ffffff;
+  --metro-now-muted: #ffffffb3;
+  --metro-now-accent: #ff9a00;
+  --metro-now-chrome: #0a0e18d9;
+  --metro-now-track: #ffffff33;
+  --metro-now-thumb: #ffffff;
+  --metro-now-fade: linear-gradient(180deg, #06101f7a 0%, #0a1220b8 42%, #000a14f2 100%);
+  --metro-now-top-fade: linear-gradient(180deg, #000000b3 0%, #00000066 55%, #00000000 100%);
+  --metro-now-scrim: #0a0e18d9;
+  color-scheme: dark;
+  --metro-night-accent: #ff9a00;
+  color-scheme: dark;
+}
+
 html,
 body {
   background: var(--metro-canvas);
