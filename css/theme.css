@@ -13704,10 +13704,11 @@ a:hover {
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.12s ease;
+  transition: opacity 0.2s ease;
 }
 
-.playback-order-toggle-container.is-dragging .rotation-tooltip {
+.playback-order-toggle-container.is-dragging .rotation-tooltip,
+.playback-order-toggle-container.is-tooltip-visible .rotation-tooltip {
   opacity: 1;
 }
 

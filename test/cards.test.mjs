@@ -269,10 +269,10 @@ test('rotation control is narrow with icons aligned to the track ends', () => {
     assert.equal(window.getComputedStyle(buttons[2]).justifyItems, 'end');
 });
 
-test('rotation tooltip styles are compiled and only shown while dragging', () => {
+test('rotation tooltip styles are compiled and shown via the visible class', () => {
     const css = compileTheme();
     assert.ok(css.includes('.rotation-tooltip'));
-    assert.match(css, /\.playback-order-toggle-container\.is-dragging\s+\.rotation-tooltip\s*{[^}]*opacity:\s*1/s);
+    assert.match(css, /\.playback-order-toggle-container\.is-tooltip-visible\s+\.rotation-tooltip\s*{[^}]*opacity:\s*1/s);
 });
 
 test('profile avatar does not render a dropdown caret', () => {

@@ -117,6 +117,21 @@
         let startX = 0;
         let moved = false;
         let lastValue = Number(track.getAttribute('aria-valuenow') ?? 1);
+        let tooltipTimer = null;
+
+        function showTooltip(lingerMilliseconds) {
+            tooltipParts.host.classList.add('is-tooltip-visible');
+            if (tooltipTimer) {
+                clearTimeout(tooltipTimer);
+                tooltipTimer = null;
+            }
+            if (lingerMilliseconds > 0) {
+                tooltipTimer = setTimeout(function () {
+                    tooltipParts.host.classList.remove('is-tooltip-visible');
+                    tooltipTimer = null;
+                }, lingerMilliseconds);
+            }
+        }
 
         setValue(track, lastValue, { animate: false });
 
@@ -125,6 +140,11 @@
             activePointer = event.pointerId;
             startX = event.clientX;
             moved = false;
+            if (tooltipTimer) {
+                clearTimeout(tooltipTimer);
+                tooltipTimer = null;
+            }
+            tooltipParts.host.classList.remove('is-tooltip-visible');
             track.classList.add('is-dragging');
             if (track.setPointerCapture) {
                 try { track.setPointerCapture(event.pointerId); } catch (_) { /* best effort */ }
@@ -137,6 +157,7 @@
             if (!moved && Math.abs(event.clientX - startX) > DRAG_THRESHOLD) {
                 moved = true;
                 tooltipParts.host.classList.add('is-dragging');
+                showTooltip(0);
             }
             if (!moved) return;
 
@@ -162,6 +183,7 @@
 
             const left = leftForPointer(track, thumb, event.clientX);
             setValue(track, valueForLeft(track, thumb, left), { animate: true });
+            showTooltip(2000);
         }
 
         track.addEventListener('pointerup', finish);
@@ -172,6 +194,7 @@
                 event.preventDefault();
                 button.blur();
                 setValue(track, ORDER[index], { animate: true });
+                showTooltip(2000);
             });
         });
     }
