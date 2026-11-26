@@ -1,5 +1,10 @@
 (function () {
     const ORDER = [1, 2, 0];
+    const LABELS = {
+        1: 'newest to oldest',
+        2: 'random',
+        0: 'oldest to newest',
+    };
     const INSET = 2;
     const FALLBACK_THUMB_WIDTH = 20;
     const DRAG_THRESHOLD = 3;
@@ -57,6 +62,27 @@
             : (value === 2 ? 'bi bi-shuffle' : 'bi bi-sort-up');
     }
 
+    function ensureTooltip(track) {
+        const host = track.closest('.playback-order-toggle-container') || track;
+        let tooltip = host.querySelector('.rotation-tooltip');
+        if (!tooltip) {
+            tooltip = document.createElement('span');
+            tooltip.className = 'rotation-tooltip';
+            tooltip.setAttribute('role', 'tooltip');
+            tooltip.setAttribute('aria-hidden', 'true');
+            host.appendChild(tooltip);
+        }
+        return { host: host, tooltip: tooltip };
+    }
+
+    function setTooltip(track, value) {
+        const label = LABELS[value] || LABELS[1];
+        track.setAttribute('aria-valuetext', label);
+        const host = track.closest('.playback-order-toggle-container');
+        const tooltip = host ? host.querySelector('.rotation-tooltip') : null;
+        if (tooltip) tooltip.textContent = label;
+    }
+
     function setValue(track, value, options) {
         options = options || {};
         value = Number(value);
@@ -68,6 +94,7 @@
             setThumbPosition(thumb, leftForValue(track, thumb, value), options.animate !== false);
             setIcon(thumb, value);
         }
+        setTooltip(track, value);
 
         const input = track.closest('.playback-order-toggle-container')
             ?.querySelector('.playback-order-value');
@@ -85,6 +112,7 @@
         if (!thumb) return;
         track.dataset.rotationReady = 'true';
 
+        const tooltipParts = ensureTooltip(track);
         let activePointer = null;
         let startX = 0;
         let moved = false;
@@ -106,7 +134,10 @@
 
         track.addEventListener('pointermove', function (event) {
             if (activePointer !== event.pointerId) return;
-            if (!moved && Math.abs(event.clientX - startX) > DRAG_THRESHOLD) moved = true;
+            if (!moved && Math.abs(event.clientX - startX) > DRAG_THRESHOLD) {
+                moved = true;
+                tooltipParts.host.classList.add('is-dragging');
+            }
             if (!moved) return;
 
             const left = leftForPointer(track, thumb, event.clientX);
@@ -116,6 +147,7 @@
                 lastValue = value;
                 track.setAttribute('aria-valuenow', String(value));
                 setIcon(thumb, value);
+                setTooltip(track, value);
             }
         });
 
@@ -123,6 +155,7 @@
             if (activePointer !== event.pointerId) return;
             activePointer = null;
             track.classList.remove('is-dragging');
+            tooltipParts.host.classList.remove('is-dragging');
             if (track.releasePointerCapture) {
                 try { track.releasePointerCapture(event.pointerId); } catch (_) { /* best effort */ }
             }

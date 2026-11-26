@@ -56,6 +56,22 @@ test('clicking an option sets the nearest state', () => {
     assert.match(track.querySelector('.slider-thumb-container i').className, /bi-sort-up/);
 });
 
+test('dragging shows a tooltip with the current setting above the track', () => {
+    const { dom, track, doc } = rotationWindow('1');
+    const container = doc.querySelector('.playback-order-toggle-container');
+    const tooltip = doc.querySelector('.rotation-tooltip');
+
+    track.dispatchEvent(pointer(dom.window, 'pointerdown', 13));
+    track.dispatchEvent(pointer(dom.window, 'pointermove', 70));
+
+    assert.ok(container.classList.contains('is-dragging'));
+    assert.equal(tooltip.textContent, 'oldest to newest');
+    assert.equal(track.getAttribute('aria-valuetext'), 'oldest to newest');
+
+    track.dispatchEvent(pointer(dom.window, 'pointerup', 70));
+    assert.ok(!container.classList.contains('is-dragging'));
+});
+
 test('dragging the thumb across the track snaps to the nearest state', () => {
     const { dom, track, doc } = rotationWindow('1');
     track.dispatchEvent(pointer(dom.window, 'pointerdown', 13));
