@@ -511,6 +511,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/audio-widget.js"></script>
+    <script src="js/rotation-control.js"></script>
     <script>
         document.querySelectorAll('audio-widget').forEach(function (widget) {
             widget.duration = 56 * 60 + 34;
@@ -546,33 +547,6 @@
 
             paintButton();
         })();
-    </script>
-    <script>
-        document.querySelectorAll('.playback-order-toggle').forEach(function (track) {
-            const thumb = track.querySelector('.slider-thumb-container');
-            const icon = thumb.querySelector('i');
-            const input = track.parentElement.querySelector('.playback-order-value');
-            const values = [1, 2, 0];
-            const buttons = [...track.querySelectorAll('.playback-node-btn')];
-
-            function setValue(value) {
-                const left = value === 1 ? '2px' : (value === 2 ? '50%' : 'calc(100% - 2px)');
-                const transform = value === 1 ? 'translateX(0)' : (value === 2 ? 'translateX(-50%)' : 'translateX(-100%)');
-                thumb.style.left = left;
-                thumb.style.transform = transform;
-                icon.className = value === 1 ? 'bi bi-sort-down' : (value === 2 ? 'bi bi-shuffle' : 'bi bi-sort-up');
-                track.setAttribute('aria-valuenow', String(value));
-                if (input) input.value = String(value);
-            }
-
-            buttons.forEach(function (button, index) {
-                button.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    button.blur();
-                    setValue(values[index]);
-                });
-            });
-        });
     </script>
 </body>
 </html>
