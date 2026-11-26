@@ -31,7 +31,7 @@
                     <i class="bi bi-sun me-1" aria-hidden="true"></i><span>light</span>
                 </button>
                 <div class="dropdown">
-                    <button class="profile-avatar dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Profile menu">K</button>
+                    <button class="profile-avatar" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Profile menu">K</button>
                     <ul class="dropdown-menu dropdown-menu-end profile-menu">
                         <li><a class="dropdown-item" href="#">manage</a></li>
                         <li><hr class="dropdown-divider"></li>
@@ -471,13 +471,13 @@
                             <div class="card-station-feed-controls">
                                 <div class="card-station-feed-controls-left">
                                     <span class="playback-order-toggle-container">
-                                        <span class="playback-order-toggle" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="2" aria-valuenow="1">
-                                            <span class="slider-thumb-container"><i class="bi bi-arrow-left-right"></i></span>
-                                            <button class="playback-node-btn" type="button">newest</button>
-                                            <button class="playback-node-btn" type="button">mixed</button>
-                                            <button class="playback-node-btn" type="button">oldest</button>
+                                        <span class="playback-order-toggle" role="slider" tabindex="0" aria-label="Playback order" aria-valuemin="0" aria-valuemax="2" aria-valuenow="1">
+                                            <span class="slider-thumb-container" aria-hidden="true"><i class="bi bi-sort-down"></i></span>
+                                            <button class="playback-node-btn" type="button" aria-label="Backwards: Newest to Oldest"><i class="bi bi-sort-down"></i></button>
+                                            <button class="playback-node-btn" type="button" aria-label="Random"><i class="bi bi-shuffle"></i></button>
+                                            <button class="playback-node-btn" type="button" aria-label="Forwards: Oldest to Newest"><i class="bi bi-sort-up"></i></button>
                                         </span>
-                                        <span class="playback-order-value">mixed</span>
+                                        <input type="hidden" class="playback-order-value" value="1">
                                     </span>
                                     <label class="card-station-feed-span">
                                         episodes
@@ -546,6 +546,33 @@
 
             paintButton();
         })();
+    </script>
+    <script>
+        document.querySelectorAll('.playback-order-toggle').forEach(function (track) {
+            const thumb = track.querySelector('.slider-thumb-container');
+            const icon = thumb.querySelector('i');
+            const input = track.parentElement.querySelector('.playback-order-value');
+            const values = [1, 2, 0];
+            const buttons = [...track.querySelectorAll('.playback-node-btn')];
+
+            function setValue(value) {
+                const left = value === 1 ? '3px' : (value === 2 ? '50%' : 'calc(100% - 3px)');
+                const transform = value === 1 ? 'translateX(0)' : (value === 2 ? 'translateX(-50%)' : 'translateX(-100%)');
+                thumb.style.left = left;
+                thumb.style.transform = transform;
+                icon.className = value === 1 ? 'bi bi-sort-down' : (value === 2 ? 'bi bi-shuffle' : 'bi bi-sort-up');
+                track.setAttribute('aria-valuenow', String(value));
+                if (input) input.value = String(value);
+            }
+
+            buttons.forEach(function (button, index) {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    button.blur();
+                    setValue(values[index]);
+                });
+            });
+        });
     </script>
 </body>
 </html>

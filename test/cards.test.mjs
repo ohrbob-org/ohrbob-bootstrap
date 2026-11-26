@@ -246,6 +246,28 @@ test('feed cards drop the kicker and use the Metro body scale', () => {
     assert.ok(fontSize('.card-feed-meta') >= 10, 'feed meta');
 });
 
+test('rotation control is a pill with a circular sliding thumb', () => {
+    const window = cardWindow(`
+        <div class="playback-order-toggle" aria-valuenow="1">
+            <span class="slider-thumb-container"></span>
+            <button class="playback-node-btn"></button>
+            <button class="playback-node-btn"></button>
+            <button class="playback-node-btn"></button>
+        </div>`);
+    const doc = window.document;
+    const track = window.getComputedStyle(doc.querySelector('.playback-order-toggle'));
+    const thumb = window.getComputedStyle(doc.querySelector('.slider-thumb-container'));
+    assert.equal(track.borderRadius, '999px');
+    assert.equal(thumb.borderRadius, '50%');
+    assert.equal(doc.querySelectorAll('.playback-node-btn').length, 3);
+});
+
+test('profile avatar does not render a dropdown caret', () => {
+    const html = readFileSync(path.join(root, 'index.html'), 'utf8');
+    assert.doesNotMatch(html, /class="profile-avatar[^"]*dropdown-toggle/);
+    assert.match(html, /class="profile-avatar"[^>]*data-bs-toggle="dropdown"/);
+});
+
 test('station editor row styles and hooks are compiled', () => {
     const css = compileTheme();
     for (const selector of [
