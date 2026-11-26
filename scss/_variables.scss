@@ -1,4 +1,4 @@
-// Exact colors from ohrbob-logo.svg
+// Brand palette shared by the Avalonia app and the web theme.
 $dark-blue: #001957;
 $light-blue: #544ff4;
 $yellow: #fdb200;
@@ -7,18 +7,65 @@ $strong-orange: #fc5d00;
 $pale-yellow: #fff4d8;
 $pale-violet: #e9e8fd;
 
-// Bootstrap theme colors mapping
+// Bootstrap role colours.
 $primary: $strong-orange;
 $secondary: $light-blue;
 $info: $light-blue;
 $warning: $yellow;
-$danger: #dc3545; // Standard bootstrap danger (red)
+$danger: #dc3545;
 $light: $pale-yellow;
-$dark: $dark-blue;
+$dark: #111217;
 
-$body-bg: #ffffff;
-$body-color: $dark-blue;
+// Metro is flat: no rounded corners, gradients or glass shadows.
+$body-bg: #f4f1ea;
+$body-color: #111217;
+$body-secondary-color: #68645c;
+$body-tertiary-color: #8a857c;
+$border-color: #d8d2c5;
 
-// Font overrides
+$border-radius: 0;
+$border-radius-sm: 0;
+$border-radius-lg: 0;
+$border-radius-xl: 0;
+$border-radius-xxl: 0;
+$border-radius-pill: 0;
+
+$btn-border-radius: 0;
+$btn-border-radius-sm: 0;
+$btn-border-radius-lg: 0;
+$input-border-radius: 0;
+$input-border-radius-sm: 0;
+$input-border-radius-lg: 0;
+$card-border-radius: 0;
+$modal-content-border-radius: 0;
+$dropdown-border-radius: 0;
+$nav-pills-border-radius: 0;
+
+$enable-shadows: false;
+$enable-gradients: false;
+$card-border-width: 0;
+
+// Type.
+$font-family-sans-serif: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+$font-size-base: 0.875rem;
 $headings-font-family: "Sulphur Point", sans-serif;
 $headings-font-weight: 700;
+$headings-line-height: 0.95;
+$headings-color: #111217;
+$link-color: $strong-orange;
+$link-hover-color: $orange-light;
+$link-decoration: none;
+
+// Form controls match the app's flat fields with a single bottom rule.
+$input-bg: #ffffff;
+$input-color: #111217;
+$input-border-color: #d8d2c5;
+$input-border-width: 1px;
+$input-focus-border-color: $strong-orange;
+$input-focus-box-shadow: none;
+$input-placeholder-color: #8a857c;
+$form-select-bg: #ffffff;
+$form-select-color: #111217;
+$form-select-border-color: #d8d2c5;
+$form-select-focus-border-color: $strong-orange;
+$form-select-focus-box-shadow: none;
