@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { mount, record } from './helpers/dom.mjs';
+import { compileTheme } from './helpers/styles.mjs';
 
 test('renders full-width bar structure', () => {
     const { el } = mount({ station: 'Test', track: 'T', artist: 'A' });
@@ -100,4 +101,13 @@ test('meta area shows cover art only, without station, title or artist', () => {
     assert.ok(el.querySelector('.track-cover'));
     // Expansion markup still carries the attributes; the bar itself must not.
     assert.ok(!el.querySelector('.audio-bar').textContent.includes('Hidden'));
+});
+
+test('web-only episode navigation and station links are styled by the kit', () => {
+    const css = compileTheme();
+    for (const selector of ['.episode-nav-row', '.station-link-icon', '.prev-episode-card', '.next-episode-card']) {
+        assert.ok(css.includes(selector), selector);
+    }
+    assert.match(css, /\.episode-nav-row\s*{[^}]*display:\s*grid/s);
+    assert.match(css, /\.audio-widget[\s\S]*?\.rounded-circle\s*{[^}]*border-radius:\s*0/s);
 });

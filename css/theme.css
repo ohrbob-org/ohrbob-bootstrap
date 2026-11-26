@@ -13422,7 +13422,7 @@ a:hover {
   display: block;
   width: 4px;
   height: 58px;
-  background: transparent;
+  background: var(--card-episode-accent);
 }
 
 .card-episode:hover {
@@ -13432,10 +13432,6 @@ a:hover {
 .card-episode:focus-within {
   outline: 2px solid var(--metro-orange);
   outline-offset: 2px;
-}
-
-.card-episode.is-playing::before {
-  background: var(--card-episode-accent);
 }
 
 .card-episode-badge {
@@ -13537,7 +13533,6 @@ a:hover {
 }
 
 .card-episode.is-played {
-  --card-episode-accent: var(--metro-hairline);
   opacity: 0.68;
 }
 
@@ -13571,6 +13566,7 @@ a:hover {
   padding: 0;
   color: var(--metro-ink);
   border: 1px solid var(--metro-hairline);
+  border-left: 4px solid var(--station-feed-accent);
   border-radius: 0;
   background: var(--metro-tile);
   box-shadow: none;
@@ -13580,6 +13576,7 @@ a:hover {
 
 .card-station-feed:hover {
   border-color: var(--metro-orange);
+  border-left-color: var(--station-feed-accent);
 }
 
 .card-station-feed:active {
@@ -13592,8 +13589,15 @@ a:hover {
 
 .list-group-item.card-station-feed {
   border: 1px solid var(--metro-hairline);
+  border-left: 4px solid var(--station-feed-accent);
   border-radius: 0;
   background: var(--metro-tile);
+}
+
+.card-station-feed,
+.list-group-item.card-station-feed {
+  border-left-style: solid;
+  border-left-width: 4px;
 }
 
 .card-station-feed-cover {
@@ -14516,6 +14520,35 @@ a:hover {
   width: 100%;
 }
 
+.audio-widget .btn.rounded-circle {
+  border-radius: 0 !important;
+}
+
+.episode-nav-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.episode-nav-row > :only-child {
+  grid-column: 1/-1;
+}
+
+.episode-nav-row .prev-episode-card,
+.episode-nav-row .next-episode-card {
+  min-width: 0;
+}
+
+.station-link-icon {
+  display: inline-flex;
+  color: var(--metro-orange);
+}
+
+@media (max-width: 575.98px) {
+  .episode-nav-row {
+    grid-template-columns: 1fr;
+  }
+}
 @media (max-width: 419.98px) {
   .audio-widget {
     padding: 8px 10px;

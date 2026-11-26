@@ -254,7 +254,7 @@
   display: block;
   width: 4px;
   height: 58px;
-  background: transparent;
+  background: var(--card-episode-accent);
 }
 
 .card-episode:hover {
@@ -264,10 +264,6 @@
 .card-episode:focus-within {
   outline: 2px solid var(--metro-orange);
   outline-offset: 2px;
-}
-
-.card-episode.is-playing::before {
-  background: var(--card-episode-accent);
 }
 
 .card-episode-badge {
@@ -369,8 +365,6 @@
 }
 
 .card-episode.is-played {
-  --card-episode-accent: var(--metro-hairline);
-
   opacity: 0.68;
 }
 
@@ -406,6 +400,7 @@
   padding: 0;
   color: var(--metro-ink);
   border: 1px solid var(--metro-hairline);
+  border-left: 4px solid var(--station-feed-accent);
   border-radius: 0;
   background: var(--metro-tile);
   box-shadow: none;
@@ -415,6 +410,8 @@
 
 .card-station-feed:hover {
   border-color: var(--metro-orange);
+  // Keep the feed stripe on hover: border-color would otherwise paint it orange.
+  border-left-color: var(--station-feed-accent);
 }
 
 .card-station-feed:active {
@@ -427,8 +424,17 @@
 
 .list-group-item.card-station-feed {
   border: 1px solid var(--metro-hairline);
+  border-left: 4px solid var(--station-feed-accent);
   border-radius: 0;
   background: var(--metro-tile);
+}
+
+// jsdom cannot expand a var()-based border shorthand into its longhands, so
+// restate the stripe width in its own rule (the browser keeps the shorthand).
+.card-station-feed,
+.list-group-item.card-station-feed {
+  border-left-style: solid;
+  border-left-width: 4px;
 }
 
 .card-station-feed-cover {
