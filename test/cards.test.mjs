@@ -262,6 +262,20 @@ test('rotation control has a rounded track and a rounded square thumb', () => {
     assert.equal(doc.querySelectorAll('.playback-node-btn').length, 3);
 });
 
+test('active rotation icon is hidden behind the sliding thumb', () => {
+    const window = cardWindow(`
+        <div class="playback-order-toggle" aria-valuenow="2">
+            <span class="slider-thumb-container"><i></i></span>
+            <button class="playback-node-btn"><i id="first"></i></button>
+            <button class="playback-node-btn"><i id="second"></i></button>
+            <button class="playback-node-btn"><i id="third"></i></button>
+        </div>`);
+    const doc = window.document;
+    assert.equal(window.getComputedStyle(doc.querySelector('#second')).opacity, '0');
+    assert.notEqual(window.getComputedStyle(doc.querySelector('#first')).opacity, '0');
+    assert.notEqual(window.getComputedStyle(doc.querySelector('#third')).opacity, '0');
+});
+
 test('profile avatar does not render a dropdown caret', () => {
     const html = readFileSync(path.join(root, 'index.html'), 'utf8');
     assert.doesNotMatch(html, /class="profile-avatar[^"]*dropdown-toggle/);

@@ -13753,6 +13753,12 @@ a:hover {
   color: var(--metro-ink);
 }
 
+.playback-order-toggle[aria-valuenow="1"] .playback-node-btn:nth-of-type(1) i,
+.playback-order-toggle[aria-valuenow="2"] .playback-node-btn:nth-of-type(2) i,
+.playback-order-toggle[aria-valuenow="0"] .playback-node-btn:nth-of-type(3) i {
+  opacity: 0;
+}
+
 @media (max-width: 575.98px) {
   .card-station-feed {
     min-height: 76px;
