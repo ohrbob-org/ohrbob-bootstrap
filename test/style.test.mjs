@@ -44,6 +44,12 @@ test('audio widget play button is the oversized orange deck button', () => {
     assert.equal(window.getComputedStyle(el.querySelector('.audio-controls')).gap, '12px');
 });
 
+test('audio widget progress and volume thumbs have rounded borders', () => {
+    const css = compileTheme();
+    assert.match(css, /::-webkit-slider-thumb[^}]*border-radius:\s*4px/s);
+    assert.match(css, /::-moz-range-thumb[^}]*border-radius:\s*4px/s);
+});
+
 test('Metro typography and theme tokens are compiled', () => {
     const css = compileTheme();
     for (const token of [

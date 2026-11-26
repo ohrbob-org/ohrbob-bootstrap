@@ -246,7 +246,7 @@ test('feed cards drop the kicker and use the Metro body scale', () => {
     assert.ok(fontSize('.card-feed-meta') >= 10, 'feed meta');
 });
 
-test('rotation control is a square track with a rounded square thumb', () => {
+test('rotation control has a rounded track and a rounded square thumb', () => {
     const window = cardWindow(`
         <div class="playback-order-toggle" aria-valuenow="1">
             <span class="slider-thumb-container"></span>
@@ -257,7 +257,7 @@ test('rotation control is a square track with a rounded square thumb', () => {
     const doc = window.document;
     const track = window.getComputedStyle(doc.querySelector('.playback-order-toggle'));
     const thumb = window.getComputedStyle(doc.querySelector('.slider-thumb-container'));
-    assert.equal(track.borderRadius, '0px');
+    assert.equal(track.borderRadius, '6px');
     assert.equal(thumb.borderRadius, '4px');
     assert.equal(doc.querySelectorAll('.playback-node-btn').length, 3);
 });

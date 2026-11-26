@@ -13694,7 +13694,7 @@ a:hover {
   height: 26px;
   padding: 2px;
   border: 1px solid var(--metro-hairline);
-  border-radius: 0;
+  border-radius: 6px;
   background: var(--metro-canvas);
   cursor: pointer;
   user-select: none;
@@ -13911,7 +13911,7 @@ a:hover {
   height: 18px;
   margin-top: -7.5px;
   border: 0;
-  border-radius: 0;
+  border-radius: 4px;
   background: var(--metro-now-thumb);
 }
 .audio-widget .audio-progress-group .audio-progress::-moz-range-track {
@@ -13926,7 +13926,7 @@ a:hover {
   width: 10px;
   height: 18px;
   border: 0;
-  border-radius: 0;
+  border-radius: 4px;
   background: var(--metro-now-thumb);
 }
 .audio-widget .audio-progress-group .audio-progress:focus {
@@ -13980,7 +13980,7 @@ a:hover {
   height: 18px;
   margin-top: -7.5px;
   border: 0;
-  border-radius: 0;
+  border-radius: 4px;
   background: var(--metro-now-thumb);
 }
 .audio-widget .audio-volume-group .audio-volume::-moz-range-track {
@@ -13995,7 +13995,7 @@ a:hover {
   width: 10px;
   height: 18px;
   border: 0;
-  border-radius: 0;
+  border-radius: 4px;
   background: var(--metro-now-thumb);
 }
 .audio-widget .audio-volume-group .audio-volume:focus {
@@ -14183,7 +14183,7 @@ a:hover {
   height: 18px;
   margin-top: -7.5px;
   border: 0;
-  border-radius: 0;
+  border-radius: 4px;
   background: var(--metro-now-thumb);
 }
 .audio-widget .audio-expanded-card .expanded-body .expanded-controls-group .expanded-progress-row .js-expanded-progress::-moz-range-track {
@@ -14198,7 +14198,7 @@ a:hover {
   width: 10px;
   height: 18px;
   border: 0;
-  border-radius: 0;
+  border-radius: 4px;
   background: var(--metro-now-thumb);
 }
 .audio-widget .audio-expanded-card .expanded-body .expanded-controls-group .expanded-progress-row .js-expanded-progress:focus {
