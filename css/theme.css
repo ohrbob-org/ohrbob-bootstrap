@@ -2,30 +2,9 @@
 @font-face {
   font-family: "Inter";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 100 900;
   font-display: swap;
-  src: url("../css/fonts/inter-400.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("../css/fonts/inter-500.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("../css/fonts/inter-600.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("../css/fonts/inter-700.woff2") format("woff2");
+  src: url("../css/fonts/inter-var.woff2") format("woff2");
 }
 @font-face {
   font-family: "Sulphur Point";
@@ -12025,7 +12004,6 @@ textarea.form-control-lg {
   --metro-now-scrim: #0a0e18d9;
   color-scheme: dark;
   --metro-night-accent: #ff9a00;
-  color-scheme: dark;
 }
 
 html,

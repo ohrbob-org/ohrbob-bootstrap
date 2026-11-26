@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import { createStyledDom, compileTheme } from './helpers/styles.mjs';
 
 test('audio widget is a flat deck pinned to the bottom', () => {
@@ -66,13 +67,17 @@ test('Metro typography and theme tokens are compiled', () => {
     assert.match(css, /--metro-ink:\s*#111217/i);
 });
 
-test('Inter is bundled for the body text', () => {
+test('Inter is bundled as one variable file so every weight is real', () => {
     const css = compileTheme();
-    for (const weight of [400, 500, 600, 700]) {
-        assert.match(css, new RegExp(
-            `@font-face[^}]*font-family:\\s*['"]Inter['"][^}]*font-weight:\\s*${weight}`, 's'));
-        assert.ok(css.includes(`inter-${weight}.woff2`));
-    }
+    assert.match(css, /@font-face[^}]*font-family:\s*['"]Inter['"][^}]*font-weight:\s*100 900/s);
+    assert.match(css, /@font-face[^}]*font-family:\s*['"]Inter['"][^}]*inter-var\.woff2/s);
+    assert.ok(!/inter-(?:400|500|600|700)\.woff2/.test(css),
+        'static per-weight Inter faces would make 500/600/700 synthesised');
+    assert.ok(fs.existsSync(new URL('../css/fonts/inter-var.woff2', import.meta.url)),
+        'the variable font file must be vendored');
+    const html = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+    assert.ok(!html.includes('fonts.googleapis.com'),
+        'the preview must not load Inter from the Google Fonts CDN');
 });
 
 test('night scope exposes the translated dark tokens', () => {
