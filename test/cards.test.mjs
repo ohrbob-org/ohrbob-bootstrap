@@ -246,34 +246,27 @@ test('feed cards drop the kicker and use the Metro body scale', () => {
     assert.ok(fontSize('.card-feed-meta') >= 10, 'feed meta');
 });
 
-test('rotation control has a rounded track and a rounded square thumb', () => {
+test('rotation control is narrow with icons aligned to the track ends', () => {
     const window = cardWindow(`
-        <div class="playback-order-toggle" aria-valuenow="1">
-            <span class="slider-thumb-container"></span>
-            <button class="playback-node-btn"></button>
-            <button class="playback-node-btn"></button>
-            <button class="playback-node-btn"></button>
-        </div>`);
+        <span class="playback-order-toggle-container">
+            <div class="playback-order-toggle" aria-valuenow="1">
+                <span class="slider-thumb-container"></span>
+                <button class="playback-node-btn"></button>
+                <button class="playback-node-btn"></button>
+                <button class="playback-node-btn"></button>
+            </div>
+        </span>`);
     const doc = window.document;
+    const container = window.getComputedStyle(doc.querySelector('.playback-order-toggle-container'));
     const track = window.getComputedStyle(doc.querySelector('.playback-order-toggle'));
     const thumb = window.getComputedStyle(doc.querySelector('.slider-thumb-container'));
+    const buttons = [...doc.querySelectorAll('.playback-node-btn')];
+    assert.equal(container.width, '84px');
     assert.equal(track.borderRadius, '6px');
     assert.equal(thumb.borderRadius, '4px');
-    assert.equal(doc.querySelectorAll('.playback-node-btn').length, 3);
-});
-
-test('active rotation icon is hidden behind the sliding thumb', () => {
-    const window = cardWindow(`
-        <div class="playback-order-toggle" aria-valuenow="2">
-            <span class="slider-thumb-container"><i></i></span>
-            <button class="playback-node-btn"><i id="first"></i></button>
-            <button class="playback-node-btn"><i id="second"></i></button>
-            <button class="playback-node-btn"><i id="third"></i></button>
-        </div>`);
-    const doc = window.document;
-    assert.equal(window.getComputedStyle(doc.querySelector('#second')).opacity, '0');
-    assert.notEqual(window.getComputedStyle(doc.querySelector('#first')).opacity, '0');
-    assert.notEqual(window.getComputedStyle(doc.querySelector('#third')).opacity, '0');
+    assert.equal(buttons.length, 3);
+    assert.equal(window.getComputedStyle(buttons[0]).justifyItems, 'start');
+    assert.equal(window.getComputedStyle(buttons[2]).justifyItems, 'end');
 });
 
 test('profile avatar does not render a dropdown caret', () => {
@@ -318,7 +311,7 @@ test('station editor row lays out a cover and accepts a feed accent', () => {
     assert.equal(cover.height, '96px');
     assert.equal(cover.objectFit, 'cover');
     const toggle = window.getComputedStyle(doc.querySelector('.playback-order-toggle-container'));
-    assert.equal(toggle.width, '104px');
+    assert.equal(toggle.width, '84px');
     assert.equal(toggle.flexShrink, '0');
 });
 

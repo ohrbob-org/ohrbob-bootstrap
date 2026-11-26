@@ -13680,10 +13680,10 @@ a:hover {
 
 .playback-order-toggle-container {
   display: inline-flex;
-  flex: 0 0 104px;
+  flex: 0 0 84px;
   flex-direction: column;
   align-items: center;
-  width: 104px;
+  width: 84px;
 }
 
 .playback-order-toggle {
@@ -13753,10 +13753,12 @@ a:hover {
   color: var(--metro-ink);
 }
 
-.playback-order-toggle[aria-valuenow="1"] .playback-node-btn:nth-of-type(1) i,
-.playback-order-toggle[aria-valuenow="2"] .playback-node-btn:nth-of-type(2) i,
-.playback-order-toggle[aria-valuenow="0"] .playback-node-btn:nth-of-type(3) i {
-  opacity: 0;
+.playback-node-btn:first-of-type {
+  justify-items: start;
+}
+
+.playback-node-btn:last-of-type {
+  justify-items: end;
 }
 
 @media (max-width: 575.98px) {
