@@ -13694,7 +13694,7 @@ a:hover {
   height: 26px;
   padding: 2px;
   border: 1px solid var(--metro-hairline);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--metro-canvas);
   cursor: pointer;
   user-select: none;
@@ -13710,7 +13710,7 @@ a:hover {
   width: 20px;
   height: 20px;
   border: 0;
-  border-radius: 50%;
+  border-radius: 4px;
   background: var(--station-feed-accent);
   color: #fff;
   font-size: 11px;
