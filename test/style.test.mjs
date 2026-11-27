@@ -67,14 +67,12 @@ test('Metro typography and theme tokens are compiled', () => {
     assert.match(css, /--metro-ink:\s*#111217/i);
 });
 
-test('Inter is bundled as one variable file so every weight is real', () => {
+test('body type uses the system UI stack without Inter', () => {
     const css = compileTheme();
-    assert.match(css, /@font-face[^}]*font-family:\s*['"]Inter['"][^}]*font-weight:\s*100 900/s);
-    assert.match(css, /@font-face[^}]*font-family:\s*['"]Inter['"][^}]*inter-var\.woff2/s);
-    assert.ok(!/inter-(?:400|500|600|700)\.woff2/.test(css),
-        'static per-weight Inter faces would make 500/600/700 synthesised');
-    assert.ok(fs.existsSync(new URL('../css/fonts/inter-var.woff2', import.meta.url)),
-        'the variable font file must be vendored');
+    assert.ok(!/['"]Inter['"]/.test(css), 'the theme must not reference Inter');
+    assert.match(css, /--metro-body:\s*"Segoe UI",\s*system-ui/);
+    assert.ok(!fs.existsSync(new URL('../css/fonts/inter-var.woff2', import.meta.url)),
+        'the Inter font file is no longer vendored');
     const html = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
     assert.ok(!html.includes('fonts.googleapis.com'),
         'the preview must not load Inter from the Google Fonts CDN');
