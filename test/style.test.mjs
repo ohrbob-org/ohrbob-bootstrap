@@ -124,3 +124,20 @@ test('checkbox and radio controls stay square at utility specificity', () => {
     assert.match(css,
         /\.form-check-input\[type=checkbox\],[^{]*\.form-check-input\[type=radio\]\s*{[^}]*border-radius:\s*0/s);
 });
+
+test('switch tracks stay pill-shaped while checkboxes and radios stay square', () => {
+    const { window, document } = createStyledDom();
+
+    const wrap = document.createElement('div');
+    wrap.className = 'form-check form-switch';
+    const toggle = document.createElement('input');
+    toggle.type = 'checkbox';
+    toggle.className = 'form-check-input';
+    wrap.appendChild(toggle);
+    document.body.appendChild(wrap);
+
+    assert.equal(window.getComputedStyle(toggle).borderRadius, '2em');
+    assert.match(compileTheme(),
+        /\.form-check\.form-switch \.form-check-input\s*{[^}]*border-radius:\s*2em/s,
+        'the switch rule must outrank the square checkbox rule');
+});
