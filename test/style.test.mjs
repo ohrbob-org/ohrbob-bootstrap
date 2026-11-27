@@ -93,3 +93,34 @@ test('night scope exposes the translated dark tokens', () => {
     assert.match(css, /\.metro-night\s*{[^}]*color-scheme:\s*dark/s);
     assert.ok(!css.includes('#cc080d18'), 'ARGB values must never be copied into CSS');
 });
+
+test('dark mode uses role emphasis for outline buttons and text utilities', () => {
+    const css = compileTheme();
+    for (const role of ['primary', 'secondary', 'danger', 'warning']) {
+        const rule = new RegExp(
+            `\\[data-bs-theme=dark\\] \\.btn-outline-${role}\\s*{[^}]*--bs-btn-color:\\s*var\\(--bs-${role}-text-emphasis\\)`,
+            's');
+        assert.match(css, rule, `btn-outline-${role} uses the dark emphasis token`);
+        const textRule = new RegExp(
+            `\\[data-bs-theme=dark\\] \\.text-${role}\\s*{[^}]*color:\\s*var\\(--bs-${role}-text-emphasis\\)\\s*!important`,
+            's');
+        assert.match(css, textRule, `.text-${role} uses the dark emphasis token`);
+    }
+});
+
+test('checkbox and radio controls stay square at utility specificity', () => {
+    const { window, document } = createStyledDom();
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.className = 'form-check-input';
+    const radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.className = 'form-check-input';
+    document.body.append(checkbox, radio);
+
+    assert.equal(window.getComputedStyle(checkbox).borderRadius, '0px');
+    assert.equal(window.getComputedStyle(radio).borderRadius, '0px');
+    const css = compileTheme();
+    assert.match(css,
+        /\.form-check-input\[type=checkbox\],[^{]*\.form-check-input\[type=radio\]\s*{[^}]*border-radius:\s*0/s);
+});

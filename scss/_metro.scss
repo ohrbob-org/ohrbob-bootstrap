@@ -530,7 +530,9 @@ a:hover {
   opacity: 0.8;
 }
 
-.form-check-input {
+.form-check-input,
+.form-check-input[type="checkbox"],
+.form-check-input[type="radio"] {
   border-radius: 0;
   border-color: var(--metro-hairline);
   background-color: var(--metro-field);
@@ -1258,3 +1260,30 @@ a:hover {
 .text-metro-navy { color: var(--metro-navy) !important; }
 .border-metro { border-color: var(--metro-hairline) !important; }
 .rounded-metro { border-radius: 0 !important; }
+
+/* ------------------------------------------------------------------ */
+/* Dark-mode role emphasis                                             */
+/* ------------------------------------------------------------------ */
+/* Bootstrap's outline buttons and text utilities keep their light-mode
+   colour tokens in dark mode. Use the dark emphasis tokens so small text
+   and hairline buttons stay readable on the near-black Metro canvas. */
+$metro-theme-roles: primary, secondary, success, info, warning, danger, light, dark;
+
+@each $role in $metro-theme-roles {
+  [data-bs-theme="dark"] .btn-outline-#{$role} {
+    --bs-btn-color: var(--bs-#{$role}-text-emphasis);
+    --bs-btn-border-color: var(--bs-#{$role}-text-emphasis);
+    --bs-btn-hover-color: var(--bs-body-bg);
+    --bs-btn-hover-bg: var(--bs-#{$role}-text-emphasis);
+    --bs-btn-hover-border-color: var(--bs-#{$role}-text-emphasis);
+    --bs-btn-active-color: var(--bs-body-bg);
+    --bs-btn-active-bg: var(--bs-#{$role}-text-emphasis);
+    --bs-btn-active-border-color: var(--bs-#{$role}-text-emphasis);
+    --bs-btn-disabled-color: var(--bs-#{$role}-text-emphasis);
+    --bs-btn-disabled-border-color: var(--bs-#{$role}-text-emphasis);
+  }
+
+  [data-bs-theme="dark"] .text-#{$role} {
+    color: var(--bs-#{$role}-text-emphasis) !important;
+  }
+}
