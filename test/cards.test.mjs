@@ -125,16 +125,16 @@ test('episode rows are flat and the current row gets the orange tab', () => {
     assert.equal(window.getComputedStyle(paused.querySelector('.card-episode-progress')).display, 'block');
 });
 
-test('current episode tab is orange and the custom property is overridable', () => {
+test('every episode row carries its feed colour bar', () => {
     const window = cardWindow(`
         <div class="card-episode is-playing"></div>
         <div class="card-episode" style="--card-episode-accent: #E63946"></div>`);
-    const doc = window.document;
-    const cards = [...doc.querySelectorAll('.card-episode')];
+    const cards = [...window.document.querySelectorAll('.card-episode')];
     assert.equal(window.getComputedStyle(cards[0]).getPropertyValue('--card-episode-accent').trim(), '#fc5d00');
     assert.equal(window.getComputedStyle(cards[1]).getPropertyValue('--card-episode-accent').trim(), '#E63946');
     const css = compileTheme();
-    assert.match(css, /\.card-episode\.is-playing::before\s*{[^}]*var\(--card-episode-accent\)/s);
+    assert.match(css, /\.card-episode::before\s*{[^}]*background:\s*var\(--card-episode-accent\)/s);
+    assert.doesNotMatch(css, /\.card-episode\.is-playing::before\s*{[^}]*background:\s*var\(--card-episode-accent\)/s);
 });
 
 test('completed episodes dim and strike the title', () => {
@@ -319,6 +319,15 @@ test('station editor row lays out a cover and accepts a feed accent', () => {
     const toggle = window.getComputedStyle(doc.querySelector('.playback-order-toggle-container'));
     assert.equal(toggle.width, '84px');
     assert.equal(toggle.flexShrink, '0');
+});
+
+test('station editor rows keep a 4px feed colour border', () => {
+    const window = cardWindow(
+        `<div class="card-station-feed" style="--station-feed-accent: #E63946"></div>`);
+    const row = window.document.querySelector('.card-station-feed');
+    assert.equal(window.getComputedStyle(row).borderLeftWidth, '4px');
+    assert.match(compileTheme(),
+        /\.card-station-feed\s*{[^}]*border-left:\s*4px\s+solid\s+var\(--station-feed-accent\)/s);
 });
 
 test('station editor rows use the flat Metro surface', () => {

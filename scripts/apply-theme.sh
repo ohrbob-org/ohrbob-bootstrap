@@ -42,15 +42,18 @@ cp "index.html" "$TARGET_DOCSROOT/bootstrap-theme.html"
 # Ensure target CSS directory exists
 mkdir -p "$TARGET_CSS_DIR"
 
-# Copy the file
+# Copy the file and the source map it advertises, so the browser never
+# requests a missing theme.css.map (404).
 echo "Copying $SOURCE_CSS to $TARGET_CSS_DIR/"
 cp "$SOURCE_CSS" "$TARGET_CSS_DIR/theme.css"
+if [ -f "$SOURCE_CSS.map" ]; then
+    echo "Copying $SOURCE_CSS.map to $TARGET_CSS_DIR/"
+    cp "$SOURCE_CSS.map" "$TARGET_CSS_DIR/theme.css.map"
+fi
 
-# Copy JS
-TARGET_JS_DIR="$TARGET_WWWROOT/js"
-echo "Copying js/audio-widget.js to $TARGET_JS_DIR/"
-mkdir -p "$TARGET_JS_DIR"
-cp "js/audio-widget.js" "$TARGET_JS_DIR/"
+# Do not copy js/audio-widget.js. The Ohrbob.Web copy is a superset of the
+# kit widget (episode navigation, station links, API integration), so the
+# theme must never overwrite it.
 
 # Copy fonts if needed
 if [ -d "fonts" ]; then
